@@ -167,10 +167,11 @@ Quanto mais ao fundo, mais a camada fica para trás da rolagem — é daí que v
 profundidade. O **Lenis** dirige a rolagem para que o `scrub` ande contínuo em
 vez de saltar no passo dos eventos de roda.
 
-### A aurora das páginas de marca
+### O pilar de luz das páginas de marca
 
-Cada página de empresa abre com o **SoftAurora** (react-bits, shader em `ogl`)
-no par de cores da própria marca, tirado do logotipo — nunca inventado:
+Cada página de empresa abre com o **LightPillar** (react-bits, shader em
+`three`) no par de cores da própria marca, tirado do logotipo — nunca
+inventado:
 
 | Marca | Par |
 |---|---|
@@ -180,14 +181,25 @@ no par de cores da própria marca, tirado do logotipo — nunca inventado:
 | ABEST | vermelho `#E8151C` → coral `#FF7A5A` |
 | Mobilidade Elétrica | violeta `#7257FF` → ciano `#21C2F5` |
 
-A faixa fica no terço superior (`bandHeight: 0.82`) e a base escurece: com a
-aurora correndo atrás do título, o kicker no acento da marca caía sobre a
-própria cor e sumia.
+A base escurece: com o pilar atrás do título, o kicker no acento da marca
+cairia sobre a própria cor e sumiria.
 
-O componente foi portado do original com três mudanças: respeita
-`prefers-reduced-motion` renderizando um único quadro estático, **pausa fora da
-viewport** (o original queima GPU enquanto o visitante lê o rodapé) e não
-responde ao mouse — aqui é plano de fundo atrás de texto, não brinquedo.
+### O vídeo que se expande
+
+A seção de obras da home abre um sobrevoo de drone que cresce de uma janela
+recortada até sangrar de borda a borda, com a seção presa (`pin`) enquanto isso.
+
+A expansão anima **`clip-path`**, não largura nem altura. Largura e altura são
+propriedades de layout: animá-las forçaria reflow a cada quadro, com a página
+inteira reposicionada 60 vezes por segundo. O `clip-path` é composto na GPU e o
+vídeo nunca muda de tamanho — muda só o quanto dele aparece.
+
+Dois véus sustentam o texto: o vertical assenta topo e base, o da esquerda é o
+que garante a leitura. O vídeo é um sobrevoo sobre grama e terra clara, e sobre
+esses quadros o creme e o laranja do eyebrow sumiriam.
+
+O vídeo só toca quando está na tela, e nunca sob `prefers-reduced-motion` —
+nesse caso a seção nasce aberta, com o pôster no lugar.
 
 ### Reduced motion
 

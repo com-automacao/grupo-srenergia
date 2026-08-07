@@ -20,7 +20,7 @@ infraestrutura de recarga.
 | Estilo | Tailwind CSS v4 (tokens via `@theme`) |
 | Fontes | Geist (display e texto) + DM Mono (rótulos) via `next/font` |
 | Animação | CSS nativo + IntersectionObserver; GSAP ScrollTrigger e Lenis no hero |
-| 3D / shader | Three.js (esfera do hero) e ogl (aurora das páginas de marca) |
+| 3D / shader | Three.js — esfera do hero e pilar de luz das páginas de marca |
 | Deploy | Vercel |
 
 Todas as páginas são estáticas (SSG).
@@ -67,7 +67,9 @@ src/
 │  ├─ hero/SolarHero.tsx    Hero: a mão sustentando o sol, em parallax
 │  ├─ originkit/            Hero-19 do Originkit: backdrop, orbe, mão
 │  ├─ SmoothScroll.tsx      Lenis + sincronia com o ScrollTrigger
-│  ├─ SoftAurora.tsx       Aurora em shader — hero das páginas de marca
+│  ├─ ScrollExpandVideo.tsx Vídeo que expande no scroll (seção de obras)
+│  ├─ reactbits/           LightPillar — hero das páginas de marca
+│  ├─ SoftAurora.tsx       Aurora em shader (alternativa, fora de uso)
 │  ├─ aurora-shader.ts     GLSL do SoftAurora (react-bits)
 │  ├─ SlideGlowButton.tsx   CTA das páginas de marca, com brilho deslizante
 │  ├─ BrandCard.tsx         Célula de marca, com o logotipo completo
@@ -196,5 +198,10 @@ Itens que dependem de material ou informação do cliente:
 - [ ] **Números institucionais.** Nada foi inventado: se houver kWp instalados,
       obras entregues ou anos de mercado que o cliente queira exibir, é possível
       adicionar uma faixa de indicadores na home.
+- [x] ~~Vídeo de obra.~~ Recebido em 42 MB a 19 Mbps (qualidade de
+      masterização, ~4× o padrão de web). Comprimido em duas resoluções —
+      `fazenda-solar-1080.mp4` (7,6 MB, desktop) e `fazenda-solar-720.mp4`
+      (4,0 MB, celular), servidas por `<source media>`. O master fica fora do
+      repositório (`.gitignore`); só as versões de produção sobem.
 - [ ] **Mais fotos de obra.** Há três imagens de drone. Um acervo maior permite
       transformar a seção "Obras entregues" em uma galeria por segmento.

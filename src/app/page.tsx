@@ -3,6 +3,7 @@ import Link from "next/link";
 import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
 import { SolarHero } from "@/components/hero/SolarHero";
+import { ScrollExpandVideo } from "@/components/ScrollExpandVideo";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -103,66 +104,55 @@ export default function Home() {
       </section>
 
       {/* ================= OBRAS ENTREGUES ================= */}
-      <section id="obras" className="on-dark section scroll-mt-24">
-        <div className="container-page">
-          <Reveal>
-            <Eyebrow className="text-solar">Obras entregues</Eyebrow>
-            <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-white text-balance">
-              Projeto no papel é fácil. Usina gerando é outra coisa.
-            </h2>
-            <p className="measure mt-6 text-lead text-ink-300">
-              Telhado industrial, solo, área rural. Sistemas dimensionados, instalados
-              e conectados pela nossa própria equipe.
-            </p>
-          </Reveal>
+      <section id="obras" className="on-dark scroll-mt-28">
+        <ScrollExpandVideo
+          src1080="/video/fazenda-solar-1080.mp4"
+          src720="/video/fazenda-solar-720.mp4"
+          poster="/video/fazenda-solar-poster.jpg"
+          label="Sobrevoo de drone sobre uma usina fotovoltaica do Grupo SR Energia, mostrando as fileiras de módulos instaladas em campo."
+          eyebrow="Obras entregues"
+          title={<>Projeto no papel é fácil. Usina gerando é outra coisa.</>}
+        >
+          <p className="measure mt-7 text-lead text-ink-300">
+            Telhado industrial, solo, área rural. Sistemas dimensionados,
+            instalados e conectados pela nossa própria equipe.
+          </p>
+        </ScrollExpandVideo>
 
-          <Reveal index={1} className="mt-14">
-            <figure className="overflow-hidden rounded-lg border border-ink-800">
-              <div className="relative aspect-[16/9] lg:aspect-[21/9]">
-                <Image
-                  src="/imagem1.jpg"
-                  alt="Vista aérea de um complexo industrial com módulos fotovoltaicos instalados sobre os telhados dos galpões."
-                  fill
-                  sizes="(min-width: 1280px) 1200px, 100vw"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <figcaption className="border-t border-ink-800 bg-ink-900 px-6 py-4 text-sm text-ink-300">
-                Geração em telhado industrial — múltiplos galpões integrados em um
-                único sistema.
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+        <div className="container-page pb-24 pt-20">
+          <div className="grid gap-px bg-ink-800 sm:grid-cols-3">
             {[
+              {
+                src: "/imagem1.jpg",
+                alt: "Vista aérea de um complexo industrial com módulos fotovoltaicos instalados sobre os telhados dos galpões.",
+                caption: "Telhado industrial — múltiplos galpões em um só sistema.",
+              },
               {
                 src: "/imagem2.jpg",
                 alt: "Vista aérea de uma usina fotovoltaica de solo com cinco fileiras de módulos em terreno rural.",
-                caption: "Usina de solo em área rural, com conexão à rede de distribuição.",
+                caption: "Usina de solo em área rural, conectada à distribuidora.",
               },
               {
                 src: "/imagem3.jpg",
                 alt: "Vista aérea de uma usina fotovoltaica de solo instalada entre vegetação e área de plantio.",
-                caption: "Geração distribuída no campo, próxima à unidade consumidora.",
+                caption: "Geração distribuída no campo, junto à unidade consumidora.",
               },
             ].map((photo, i) => (
-              <Reveal key={photo.src} index={i}>
-                <figure className="h-full overflow-hidden rounded-lg border border-ink-800">
+              <Reveal key={photo.src} index={i} as="figure" className="h-full">
+                <div className="bg-ink-950">
                   <div className="relative aspect-[4/3]">
                     <Image
                       src={photo.src}
                       alt={photo.alt}
                       fill
-                      sizes="(min-width: 640px) 50vw, 100vw"
+                      sizes="(min-width: 640px) 33vw, 100vw"
                       className="object-cover"
                     />
                   </div>
-                  <figcaption className="border-t border-ink-800 bg-ink-900 px-6 py-4 text-sm text-ink-300">
+                  <figcaption className="px-6 py-5 text-sm text-ink-300">
                     {photo.caption}
                   </figcaption>
-                </figure>
+                </div>
               </Reveal>
             ))}
           </div>

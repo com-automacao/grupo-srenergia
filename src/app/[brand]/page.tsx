@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { accentClasses, brands, getBrand } from "@/lib/brands";
 import { BrandGlyph } from "@/components/BrandGlyph";
-import { SoftAurora } from "@/components/SoftAurora";
+import LightPillar from "@/components/reactbits/LightPillar";
 import { SlideGlowButton } from "@/components/SlideGlowButton";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
@@ -48,24 +48,22 @@ export default async function BrandPage({ params }: Params) {
     >
       {/* ================= HERO ================= */}
       <section className="on-dark relative overflow-hidden">
-        {/* Aurora em shader, no par de cores da própria marca. Substitui o
-            gradiente radial estático: aqui cada empresa ganha um plano de fundo
-            que é reconhecivelmente dela. */}
+        {/* Pilar de luz no par de cores da própria marca — as duas saem do
+            logotipo, nenhuma é invenção. */}
         <div className="pointer-events-none absolute inset-0">
-          <SoftAurora
-            color1={brand.aurora[0]}
-            color2={brand.aurora[1]}
-            speed={0.35}
-            scale={1.4}
-            bandHeight={0.82}
-            bandSpread={0.9}
-            brightness={1.45}
+          <LightPillar
+            topColor={brand.aurora[0]}
+            bottomColor={brand.aurora[1]}
+            intensity={1.1}
+            rotationSpeed={0.18}
+            pillarWidth={2.4}
+            pillarHeight={0.55}
+            quality="high"
           />
         </div>
 
-        {/* A faixa fica no terço superior (bandHeight 0.82) e a base escurece:
-            com a aurora correndo atrás do título, o kicker no acento da marca
-            caía sobre a própria cor e sumia. */}
+        {/* A base escurece: com o pilar atrás do título, o kicker no acento da
+            marca cairia sobre a própria cor e sumiria. */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink-950 via-ink-950/45 to-transparent"

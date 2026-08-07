@@ -42,3 +42,6 @@ next-env.d.ts
 
 .claude
 .originkit/
+# Master do video da fazenda solar (42 MB, 19 Mbps). Fica fora do repo:
+# o que vai para producao sao as versoes comprimidas em public/video/.
+/public/sr-energia-farm.mp4
