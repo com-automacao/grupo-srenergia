@@ -3,7 +3,6 @@ import Link from "next/link";
 import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
 import { SolarHero } from "@/components/hero/SolarHero";
-import { EnergyLines } from "@/components/EnergyLines";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -32,29 +31,26 @@ export default function Home() {
     <>
       <SolarHero />
 
-      {/* ================= MANIFESTO + ECOSSISTEMA ================= */}
-      <section id="ecossistema" className="on-dark section scroll-mt-24">
+      {/* ================= ECOSSISTEMA ================= */}
+      <section id="ecossistema" className="section scroll-mt-28 bg-cream-100">
         <div className="container-page">
-          <Reveal className="text-center">
-            <Eyebrow className="justify-center text-solar">
+          <Reveal>
+            <p className="font-mono text-label uppercase text-solar-ink">
               Conheça nossas empresas
-            </Eyebrow>
-            <h2 className="mx-auto mt-6 max-w-[22ch] font-display text-h1 text-white text-balance">
+            </p>
+            <h2 className="mt-6 max-w-[18ch] font-display text-h1 text-ink-950 text-balance">
               Quatro empresas. Uma única cadeia de energia.
             </h2>
-            <p className="mx-auto mt-6 max-w-[62ch] text-lead text-ink-300">
+            <p className="measure mt-6 text-lead text-ink-600">
               Cada empresa tem uma função específica, mas todas trabalham de forma
               integrada. É isso que permite atender desde uma instalação residencial
               até uma operação que não pode ficar sem energia um minuto sequer.
             </p>
           </Reveal>
 
-          {/* Assinatura: o tronco do grupo se ramifica nas quatro marcas.
-              A largura acompanha exatamente a do grid — os ramos terminam em
-              12,5% / 37,5% / 62,5% / 87,5%, que são os centros das 4 colunas. */}
-          <EnergyLines className="mt-14 hidden h-[140px] w-full lg:block" />
-
-          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4">
+          {/* A malha faz a separação: uma grade de 1px preenchida por células
+              cor de creme, sem borda em cada card. */}
+          <div className="mt-16 grid gap-px bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
             {companies.map((brand, i) => (
               <Reveal key={brand.slug} index={i} as="div" className="h-full">
                 <BrandCard brand={brand} />

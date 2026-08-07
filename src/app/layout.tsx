@@ -1,24 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter_Tight, DM_Mono } from "next/font/google";
+import { Geist, DM_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
-/* Serifada editorial no display: peso único, presença vinda do tamanho e do
-   tracking negativo. Grotesca no texto. Mono nos rótulos e leituras de dados —
-   a voz de instrumentação do sistema. */
-const instrument = Instrument_Serif({
+/* Uma grotesca só, em dois papéis: display em peso alto com tracking bem
+   negativo, texto em peso normal. Mono nos rótulos e leituras de dados — a voz
+   de instrumentação do sistema. Duas grotescas parecidas seriam redundância;
+   o contraste vem de peso, escala e tracking. */
+const geist = Geist({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  subsets: ["latin"],
-  variable: "--font-tight-next",
+  variable: "--font-geist-next",
   display: "swap",
 });
 
@@ -73,7 +66,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${instrument.variable} ${interTight.variable} ${dmMono.variable}`}
+      className={`${geist.variable} ${dmMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />

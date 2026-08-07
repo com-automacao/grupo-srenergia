@@ -65,36 +65,36 @@
   --color-danger: #c1121f;
 
   /* --- Tipografia ----------------------------------------------------------
-     Serifada editorial no display, grotesca no texto, mono nos rótulos e
-     leituras de dados — a voz de instrumentação da referência. */
-  --font-display: var(--font-instrument), Georgia, serif;
-  --font-sans: var(--font-tight-next), ui-sans-serif, system-ui, sans-serif;
+     Uma grotesca só (Geist) em dois papéis — display e texto — mais mono nos
+     rótulos e leituras de dados, que é a voz de instrumentação do sistema. */
+  --font-display: var(--font-geist-next), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-next), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-dm-mono), ui-monospace, monospace;
   /* O hero do Originkit referencia estes dois nomes. */
-  --font-instrument-serif: var(--font-instrument), Georgia, serif;
-  --font-tight: var(--font-tight-next), ui-sans-serif, system-ui, sans-serif;
+  --font-instrument-serif: var(--font-geist-next), ui-sans-serif, sans-serif;
+  --font-tight: var(--font-geist-next), ui-sans-serif, system-ui, sans-serif;
 
-  /* A serifada é de peso único (400) e ganha presença por tamanho e tracking
-     negativo, não por peso. */
+  /* Display em peso alto e tracking bem negativo: é daí que vem a presença,
+     agora que não há serifa para carregá-la. */
   --text-display: clamp(3rem, 7vw, 5.5rem);
   --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.02em;
-  --text-display--font-weight: 400;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 650;
 
   --text-h1: clamp(2.5rem, 5vw, 4rem);
   --text-h1--line-height: 1.06;
-  --text-h1--letter-spacing: -0.02em;
-  --text-h1--font-weight: 400;
+  --text-h1--letter-spacing: -0.032em;
+  --text-h1--font-weight: 650;
 
   --text-h2: clamp(2rem, 3.4vw, 3rem);
   --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.015em;
-  --text-h2--font-weight: 400;
+  --text-h2--letter-spacing: -0.028em;
+  --text-h2--font-weight: 650;
 
   --text-h3: clamp(1.25rem, 1.7vw, 1.5rem);
   --text-h3--line-height: 1.25;
-  --text-h3--letter-spacing: -0.01em;
-  --text-h3--font-weight: 500;
+  --text-h3--letter-spacing: -0.018em;
+  --text-h3--font-weight: 600;
 
   --text-lead: clamp(1.0625rem, 1.4vw, 1.25rem);
   --text-lead--line-height: 1.5;

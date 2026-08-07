@@ -18,12 +18,12 @@ infraestrutura de recarga.
 | Framework | Next.js 16 (App Router, React 19) |
 | Linguagem | TypeScript |
 | Estilo | Tailwind CSS v4 (tokens via `@theme`) |
-| Fontes | Sora (display) + Inter (texto) via `next/font` |
-| Animação | CSS nativo + IntersectionObserver — **sem biblioteca de animação** |
+| Fontes | Geist (display e texto) + DM Mono (rótulos) via `next/font` |
+| Animação | CSS nativo + IntersectionObserver; GSAP ScrollTrigger e Lenis no hero |
+| 3D | Three.js — a esfera de partículas do hero |
 | Deploy | Vercel |
 
-Todas as páginas são estáticas (SSG). Nenhuma dependência além do núcleo
-Next/React/Tailwind.
+Todas as páginas são estáticas (SSG).
 
 ---
 
@@ -64,11 +64,14 @@ src/
 ├─ components/
 │  ├─ Header.tsx            Nav fixa, dropdown do ecossistema, menu mobile
 │  ├─ Footer.tsx
-│  ├─ BrandCard.tsx         Card de marca com régua de acento no hover
-│  ├─ BrandMark.tsx         Glifos das marcas em SVG
+│  ├─ hero/SolarHero.tsx    Hero: a mão sustentando o sol, em parallax
+│  ├─ originkit/            Hero-19 do Originkit: backdrop, orbe, mão
+│  ├─ SmoothScroll.tsx      Lenis + sincronia com o ScrollTrigger
+│  ├─ BrandCard.tsx         Célula de marca, com o logotipo completo
+│  ├─ BrandLockup.tsx       Logotipo oficial completo
+│  ├─ BrandGlyph.tsx        Símbolo oficial, com fallback no glifo SVG
+│  ├─ BrandMark.tsx         Glifos em SVG — só para marcas sem logo
 │  ├─ GroupLogo.tsx         Lockup do Grupo
-│  ├─ EnergyBus.tsx         Hero: 5 fontes convergindo em uma saída
-│  ├─ EnergyLines.tsx       Ecossistema: tronco que se ramifica nas 4 marcas
 │  ├─ ContactForm.tsx
 │  ├─ Reveal.tsx            Reveal no scroll (IntersectionObserver)
 │  └─ ui.tsx                Botões, eyebrow, seta
@@ -104,51 +107,42 @@ existe, ele é adicionado ao `MASTER.md` primeiro.
 
 ### Cor
 
-Um **azul-noite institucional** (`#050B18`) serve de espinha para todo o grupo,
-e cada marca carrega um acento herdado do seu próprio logo:
+Superfície **creme quente `#FFF7E9`**, tinta quente `#0D0B08` nas âncoras
+escuras, e o **laranja da SR Energia `#FF4B12`** como acento único do Grupo.
+Cada empresa só recupera o seu acento na própria página — a contenção é o que
+sustenta o sistema.
 
-| Marca | puro | `-ink` (texto no claro) | `-lit` (texto no escuro) |
+Cada acento tem três papéis, porque uma cor só não passa em contraste nos dois
+regimes de luz:
+
+| Marca | puro | `-ink` (no creme) | `-lit` (no escuro) |
 |---|---|---|---|
-| SR Energia | `#FF4B12` | `#CC3100` | `#FF4B12` |
-| Jireh Energia | `#21C2F5` | `#077497` | `#21C2F5` |
-| JirehMac | `#86CE2E` | `#4E771B` | `#86CE2E` |
-| ABEST | `#E8151C` | `#D7141A` | `#F2565B` |
-| Mobilidade Elétrica | `#7257FF` | `#6749FF` | `#9C87FF` |
+| SR Energia / Grupo | `#FF4B12` | `#C93000` | `#FF4B12` |
+| Jireh Energia | `#21C2F5` | `#06687F` | `#21C2F5` |
+| JirehMac | `#86CE2E` | `#466B18` | `#86CE2E` |
+| ABEST | `#E8151C` | `#C11217` | `#F2565B` |
+| Mobilidade Elétrica | `#7257FF` | `#5A3CEB` | `#9C87FF` |
 
-Cada acento tem três papéis porque uma cor só não passa em contraste nos dois
-regimes de luz. O tom puro é **decorativo e fundo de botão** — nunca texto sobre
-fundo claro. Em botão, laranja, ciano e verde-limão recebem **texto escuro**
-(5,9 a 10,2:1); vermelho e violeta recebem branco. Inverter o texto preserva a
-cor da marca em vez de escurecê-la até virar lama.
+O tom puro é **decorativo e fundo de botão** — nunca texto sobre creme. Em
+botão, laranja, ciano e verde-limão recebem **texto escuro** (5,9 a 10,2:1);
+vermelho e violeta recebem branco. Inverter o texto preserva a cor da marca em
+vez de escurecê-la até virar lama.
 
-O regime de luz alterna por seção: escuro nas âncoras (hero, ecossistema,
-obras, rodapé), claro onde o conteúdo respira.
-
-Todo par texto/fundo do site foi **medido**, não estimado — a tabela de razões
-está em [`MASTER.md`](MASTER.md) §2.6, junto com as armadilhas já encontradas
-(ex.: `brand-600` reprova sobre `paper-100`; o hover do botão primário escurece
-em vez de clarear, senão o texto branco cairia para 3,4:1 no exato momento de
-uso).
-
-### A assinatura visual
-
-Dois desenhos em SVG carregam o conceito e fazem par entre si:
-
-- **Hero** — cinco fontes descem, convergem em um único nó e saem por uma linha
-  só. É a proposta do grupo dita graficamente: muitas especialidades, uma
-  entrega. Um pulso de luz percorre cada ramo em loop lento e dessincronizado.
-- **Ecossistema** — o caminho inverso: um tronco que se ramifica nas quatro
-  marcas, cada ramo terminando exatamente no centro do card correspondente.
-
-Por isso o hero é curto de texto. Quem comunica é o desenho — parágrafo longo
-em hero de empresa de energia é o que todo concorrente já faz.
+Todo par texto/fundo foi **medido**, não estimado — tabela e armadilhas em
+[`MASTER.md`](MASTER.md) §2.5.
 
 ### Motion
 
-Transições de 160–320ms em `ease-out` cúbico. O hover **acende** (borda e
-acento ganham luz, translação de −2px) em vez de crescer — não há `scale`,
-bounce, elástico nem parallax. `prefers-reduced-motion` é respeitado
-globalmente, e sem JavaScript todo o conteúdo nasce visível.
+Transições de 160–320ms em `ease-out` cúbico. O hover **acende** (a célula
+esquenta um passo, a régua do acento se estende) em vez de crescer — não há
+`scale`, bounce nem elástico.
+
+O hero é a exceção deliberada: quatro camadas em parallax presas ao scroll via
+GSAP ScrollTrigger, com o Lenis dirigindo a rolagem. Sob
+`prefers-reduced-motion` nada disso monta — nem o parallax, nem o Lenis.
+Sequestrar a rolagem de quem pediu menos movimento é o oposto do que a
+preferência existe para garantir. Sem JavaScript, todo o conteúdo nasce
+visível.
 
 > ⚠️ **Cascade layers.** As regras base ficam em `@layer base` e os utilitários
 > do projeto em `@layer components`. CSS fora de layer vence *todas* as
@@ -174,13 +168,13 @@ Itens que dependem de material ou informação do cliente:
       **símbolos** foram recortados, quadrados e otimizados para
       `public/marca/*-simbolo.png` (2 MB → 11–20 KB cada) e são o que o site
       usa. Os originais seguem em `public/logo-*.png`.
-- [ ] **Versão negativa dos logotipos.** O logotipo completo das marcas tem
-      tipografia em azul-marinho e grafite, que somem no azul-noite — por isso o
-      site aplica o símbolo mais o nome na tipografia própria, e não o lockup
-      inteiro. Uma versão negativa permitiria usar o lockup completo também nas
-      superfícies escuras.
-- [ ] **Marca do Grupo SR Energia.** Ainda não fornecida; o lockup atual é
-      tipográfico, usando o arco de grid solar em degradê azul→laranja.
+- [ ] **Versão negativa dos logotipos.** Sobre creme os cinco lockups completos
+      funcionam e é o que o site usa. Nas âncoras escuras, porém, só o da SR
+      Energia sobrevive: Jireh, JirehMac e ABEST têm tipografia em azul-marinho
+      e grafite, que somem no escuro — ali entra apenas o símbolo. Uma versão
+      negativa liberaria o lockup completo nos dois regimes de luz.
+- [ ] **Marca do Grupo SR Energia.** Ainda não fornecida; o header usa o
+      logotipo da SR Energia, a marca-mãe, com "GRUPO" em mono acima.
 - [ ] **Símbolo da Mobilidade Elétrica.** Única frente sem marca — usa um glifo
       desenhado em SVG (`BrandMark.tsx`), que o `BrandGlyph` aciona como
       fallback automático quando `symbol` está vazio.

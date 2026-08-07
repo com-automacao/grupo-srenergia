@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { accentClasses, type Brand } from "@/lib/brands";
-import { BrandGlyph } from "./BrandGlyph";
+import { BrandLockup } from "./BrandLockup";
 import { Arrow } from "./ui";
 
 /**
- * Card de marca (MASTER.md §7): superfície escura + hairline, com uma régua de
- * 3px no acento da empresa que se estende de 0 a 100% da largura no hover.
- * Sem escala — o card acende, não cresce.
+ * Card de marca — uma célula da malha, no creme.
+ *
+ * Traz o logotipo oficial completo, não o símbolo: aqui há espaço para ele e é
+ * onde o visitante conhece a empresa pela primeira vez. Sobre creme os cinco
+ * lockups funcionam, inclusive os de tipografia azul-marinho e grafite, que
+ * seriam ilegíveis no escuro.
+ *
+ * Sem borda ao redor: quem separa é a malha. No hover a célula acende — a régua
+ * do acento se estende e o fundo esquenta um passo.
  */
 export function BrandCard({ brand }: { brand: Brand }) {
   const accent = accentClasses[brand.accent];
@@ -14,7 +20,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
   return (
     <Link
       href={`/${brand.slug}`}
-      className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-ink-800 bg-ink-900 p-7 transition-[border-color,transform,box-shadow] duration-240 ease-out hover:-translate-y-0.5 ${accent.borderHover} ${accent.ring}`}
+      className="group relative flex h-full flex-col bg-cream-50 p-7 transition-colors duration-240 ease-out hover:bg-cream-100 lg:p-8"
     >
       {/* Régua de acento no topo. Anima `transform`, não `width`: largura é
           propriedade de layout e forçaria reflow a cada frame. */}
@@ -23,26 +29,27 @@ export function BrandCard({ brand }: { brand: Brand }) {
         className={`absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 transition-transform duration-320 ease-out group-hover:scale-x-100 ${accent.bg}`}
       />
 
-      <BrandGlyph brand={brand} sizes="48px" className={`h-11 w-11 ${accent.text}`} />
+      <BrandLockup brand={brand} className="h-9" sizes="200px" />
 
-      <h3 className="mt-6 font-display text-h3 text-white">{brand.name}</h3>
-      <p className={`mt-1.5 text-sm font-medium ${accent.text}`}>{brand.kicker}</p>
+      <p className={`mt-7 font-mono text-label uppercase ${accent.textInk}`}>
+        {brand.kicker}
+      </p>
 
-      <p className="mt-4 text-sm leading-relaxed text-ink-300">{brand.tagline}</p>
+      <p className="mt-4 text-ink-600">{brand.tagline}</p>
 
-      <ul className="mt-6 space-y-2.5 border-t border-ink-800 pt-6">
+      <ul className="mt-7 space-y-2.5 border-t border-cream-300 pt-7">
         {brand.highlights.map((item) => (
-          <li key={item} className="flex gap-3 text-sm text-ink-300">
+          <li key={item} className="flex gap-3 text-sm text-ink-600">
             <span
               aria-hidden="true"
-              className={`mt-[0.5em] h-1 w-1 shrink-0 rounded-full ${accent.bg}`}
+              className={`mt-[0.55em] h-1 w-1 shrink-0 rounded-full ${accent.bg}`}
             />
             {item}
           </li>
         ))}
       </ul>
 
-      <span className="mt-auto flex items-center gap-2 pt-7 text-sm font-semibold text-white">
+      <span className="mt-auto flex items-center gap-2 pt-8 text-sm font-medium text-ink-950">
         Conhecer
         <Arrow />
       </span>

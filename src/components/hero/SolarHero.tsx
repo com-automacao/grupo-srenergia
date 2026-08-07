@@ -83,10 +83,13 @@ export function SolarHero() {
         <Backdrop />
       </div>
 
-      {/* Lavagem escura na base, para o hero morrer no creme da seção seguinte */}
+      {/* Lavagem escura na base, para o hero morrer no escuro antes da seção
+          seguinte. Fica em z-[15]: acima do fundo e da mão (z-10), abaixo do
+          texto (z-20). Em z-30 ela cobria os botões — o CTA creme aparecia
+          cinza-escuro e a linha de apoio perdia contraste. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-[38%] bg-linear-to-b from-transparent via-ink-950/30 to-ink-950"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[38%] bg-linear-to-b from-transparent via-ink-950/30 to-ink-950"
       />
 
       <div className="relative h-[874px] overflow-hidden ipad:h-[1133px] desktop-sm:h-dvh desktop-sm:min-h-[860px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
@@ -98,15 +101,16 @@ export function SolarHero() {
         {/* Camada 3 — o texto */}
         <div
           data-parallax-layer="3"
-          className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-32 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[34rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
+          className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-32 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
         >
           <div className="flex flex-col items-center gap-5 desktop-sm:items-start">
             <p className="font-mono text-label uppercase text-solar">
               Ecossistema de energia
             </p>
 
-            <h1 className="font-display text-display text-cream-50 text-balance">
-              Toda a energia. <span className="italic">Um só grupo.</span>
+            <h1 className="font-display text-h1 text-cream-50 text-balance">
+              Toda a energia.{" "}
+              <span className="text-solar">Um só grupo.</span>
             </h1>
 
             <p className="max-w-[42ch] text-lead text-ink-300">

@@ -122,7 +122,10 @@ export const Orb = () => {
   return (
     <div
       aria-hidden
-      className="absolute top-[499px] left-1/2 flex h-[269.816px] w-[228.39px] -translate-x-1/2 justify-center ipad:top-151.75 ipad:h-[383.119px] ipad:w-[324.3px] desktop-sm:top-[178px] desktop-sm:h-[311px] desktop-sm:w-[340px] desktop-sm:translate-y-10"
+      /* translate-y desceu de 10 para 28 (40px -> 112px): no valor original o
+         orbe pairava acima das pontas dos dedos e nao lia como apoiado na
+         palma. */
+      className="absolute top-[499px] left-1/2 flex h-[269.816px] w-[228.39px] -translate-x-1/2 justify-center ipad:top-151.75 ipad:h-[383.119px] ipad:w-[324.3px] desktop-sm:top-[178px] desktop-sm:h-[311px] desktop-sm:w-[340px] desktop-sm:translate-y-28"
     >
       {/* Sphere box — every layer below sits in the same grid cell, centred */}
       <div className="relative grid h-[197.32px] w-[215.853px] shrink-0 place-items-center ipad:h-[280.18px] ipad:w-[306.495px] desktop-sm:h-[311px] desktop-sm:w-[340px]">
