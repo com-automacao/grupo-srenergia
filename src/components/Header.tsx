@@ -95,7 +95,7 @@ export function Header() {
           aria-label="Grupo SR Energia — página inicial"
           className="rounded-sm"
         >
-          <GroupLogo tone={solid ? "dark" : "light"} />
+          <GroupLogo />
         </Link>
 
         {/* ---- Navegação desktop -------------------------------------- */}

@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container-page py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
           <div>
-            <GroupLogo tone="light" />
+            <GroupLogo />
             <p className="measure mt-6 text-sm text-ink-300">
               Um ecossistema integrado de soluções energéticas: geração, engenharia,
               tecnologia própria de geração inteligente e modelos que tornam a energia
