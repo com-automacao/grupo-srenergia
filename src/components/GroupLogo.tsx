@@ -19,7 +19,7 @@ export function GroupLogo({ className }: { className?: string }) {
   return (
     <BrandLockup
       brand={sr}
-      className={`h-[2.1rem] sm:h-[2.4rem] ${className ?? ""}`}
+      className={`h-[2.52rem] sm:h-[2.88rem] ${className ?? ""}`}
       sizes="240px"
       priority
     />

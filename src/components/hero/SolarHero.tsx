@@ -40,6 +40,21 @@ const LAYERS = [
 /** As três camadas da tecnologia JirehMac, como leitura de instrumentação. */
 const READOUT = ["Geração", "Armazenamento", "Automação"];
 
+/**
+ * TESTE DE TOM — trocar para "solar" devolve o laranja da marca.
+ *
+ * O fundo do hero são PNGs achatados em laranja, então o azul é obtido por
+ * `hue-rotate`: 16° (laranja da marca) para 208° (azul do logotipo) = +192°. A
+ * mão entra no mesmo giro, senão a pele continuaria iluminada de laranja por um
+ * sol azul.
+ */
+const HERO_TINT: "solar" | "azul" = "azul";
+
+const TINT = {
+  solar: { filter: undefined, orb: "#FF4B12", accent: "text-solar" },
+  azul: { filter: "hue-rotate(192deg)", orb: "#2B8FE8", accent: "text-srblue" },
+}[HERO_TINT];
+
 export function SolarHero() {
   const rootRef = useRef<HTMLElement>(null);
 
@@ -80,7 +95,7 @@ export function SolarHero() {
     >
       {/* Camada 1 — a luz de fundo, a que mais fica para trás */}
       <div data-parallax-layer="1" className="pointer-events-none absolute inset-0 z-0">
-        <Backdrop />
+        <Backdrop filter={TINT.filter} />
       </div>
 
       {/* Lavagem escura na base, para o hero morrer no escuro antes da seção
@@ -94,8 +109,10 @@ export function SolarHero() {
 
       <div className="relative h-[874px] overflow-hidden ipad:h-[1133px] desktop-sm:h-dvh desktop-sm:min-h-[860px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
         {/* Camada 2 — o sol */}
-        <div data-parallax-layer="2" className="pointer-events-none absolute inset-0 z-10">
-          <Orb />
+        {/* z-[12]: acima da mao (z-10) e abaixo do texto (z-20). Em z-10 o dedo
+            indicador passava por cima do sol, invertendo a leitura. */}
+        <div data-parallax-layer="2" className="pointer-events-none absolute inset-0 z-[12]">
+          <Orb color={TINT.orb} glowFilter={TINT.filter} />
         </div>
 
         {/* Camada 3 — o texto */}
@@ -104,13 +121,13 @@ export function SolarHero() {
           className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-32 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
         >
           <div className="flex flex-col items-center gap-5 desktop-sm:items-start">
-            <p className="font-mono text-label uppercase text-solar">
+            <p className={`font-mono text-label uppercase ${TINT.accent}`}>
               Ecossistema de energia
             </p>
 
             <h1 className="font-display text-h1 text-cream-50 text-balance">
               Toda a energia.{" "}
-              <span className="text-solar">Um só grupo.</span>
+              <span className={TINT.accent}>Um só grupo.</span>
             </h1>
 
             <p className="max-w-[42ch] text-lead text-ink-300">
@@ -144,7 +161,7 @@ export function SolarHero() {
           src={asset("hand.png")}
           alt=""
           className="pointer-events-none absolute top-[calc(50%+255px)] left-[calc(50%-4px)] z-10 h-[410px] w-[738px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover ipad:top-[894px] ipad:left-1/2 ipad:h-[502px] ipad:w-[902px] desktop-sm:top-auto desktop-sm:bottom-0 desktop-sm:h-auto desktop-sm:w-[86vw] desktop-sm:min-w-[1239px] desktop-sm:origin-bottom desktop-sm:translate-y-0 desktop-sm:scale-115 ultrawide:top-[384px] ultrawide:bottom-auto ultrawide:w-[1180px] ultrawide:min-w-0 ultrawide:scale-100"
-          style={{ maskImage: HAND_MASK, WebkitMaskImage: HAND_MASK }}
+          style={{ maskImage: HAND_MASK, WebkitMaskImage: HAND_MASK, filter: TINT.filter }}
         />
 
         {/* Leitura de instrumentação — as camadas da tecnologia JirehMac */}

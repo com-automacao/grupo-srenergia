@@ -20,7 +20,7 @@ infraestrutura de recarga.
 | Estilo | Tailwind CSS v4 (tokens via `@theme`) |
 | Fontes | Geist (display e texto) + DM Mono (rótulos) via `next/font` |
 | Animação | CSS nativo + IntersectionObserver; GSAP ScrollTrigger e Lenis no hero |
-| 3D | Three.js — a esfera de partículas do hero |
+| 3D / shader | Three.js (esfera do hero) e ogl (aurora das páginas de marca) |
 | Deploy | Vercel |
 
 Todas as páginas são estáticas (SSG).
@@ -67,6 +67,8 @@ src/
 │  ├─ hero/SolarHero.tsx    Hero: a mão sustentando o sol, em parallax
 │  ├─ originkit/            Hero-19 do Originkit: backdrop, orbe, mão
 │  ├─ SmoothScroll.tsx      Lenis + sincronia com o ScrollTrigger
+│  ├─ SoftAurora.tsx       Aurora em shader — hero das páginas de marca
+│  ├─ aurora-shader.ts     GLSL do SoftAurora (react-bits)
 │  ├─ BrandCard.tsx         Célula de marca, com o logotipo completo
 │  ├─ BrandLockup.tsx       Logotipo oficial completo
 │  ├─ BrandGlyph.tsx        Símbolo oficial, com fallback no glifo SVG
@@ -144,6 +146,13 @@ Sequestrar a rolagem de quem pediu menos movimento é o oposto do que a
 preferência existe para garantir. Sem JavaScript, todo o conteúdo nasce
 visível.
 
+> 🔬 **Teste de tom em andamento.** O hero da home está em **azul**, não no
+> laranja da marca. A chave é `HERO_TINT` no topo de
+> [`SolarHero.tsx`](src/components/hero/SolarHero.tsx) — trocar `"azul"` por
+> `"solar"` devolve o laranja. Como o fundo são PNGs achatados em laranja, o
+> azul vem de um `hue-rotate(192deg)` aplicado ao fundo, ao halo do orbe e à
+> mão; a esfera de partículas recebe a cor direto.
+
 > ⚠️ **Cascade layers.** As regras base ficam em `@layer base` e os utilitários
 > do projeto em `@layer components`. CSS fora de layer vence *todas* as
 > utilities do Tailwind v4 — foi assim que um `* { border-color }` chegou a
@@ -155,7 +164,7 @@ visível.
 ## Conteúdo
 
 Todo o conteúdo das marcas vive em [`src/lib/brands.ts`](src/lib/brands.ts):
-nome, descrição, lista de serviços, acento e glifo. Alterar uma descrição ali
+nome, descrição, lista de serviços, acento, glifo e o par de cores da aurora. Alterar uma descrição ali
 reflete na home, no menu, no rodapé e na página interna ao mesmo tempo.
 
 ---

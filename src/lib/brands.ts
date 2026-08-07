@@ -32,6 +32,11 @@ export type Brand = {
   /** Token de cor Tailwind, sem o prefixo. Ex.: "sr" → text-sr / bg-sr. */
   accent: "sr" | "jireh" | "jirehmac" | "abest" | "mobi";
   /**
+   * Par de cores da aurora do hero da página. Ambas saem do logotipo da marca —
+   * a segunda é o tom secundário que já existe no símbolo, não uma invenção.
+   */
+  aurora: [string, string];
+  /**
    * Glifo desenhado em SVG. Só entra em cena quando a marca não tem símbolo
    * próprio — hoje, apenas a Mobilidade Elétrica.
    */
@@ -91,6 +96,8 @@ export const brands: Brand[] = [
       },
     ],
     accent: "sr",
+    // laranja do lettering -> âmbar do arco
+    aurora: ["#FF4B12", "#FFA033"],
     mark: "sr",
     symbol: "/marca/srenergia-simbolo.png",
     logo: "/marca/srenergia.png",
@@ -130,6 +137,8 @@ export const brands: Brand[] = [
       },
     ],
     accent: "jireh",
+    // ciano -> azul profundo, o degradê da própria esfera
+    aurora: ["#21C2F5", "#0A46B4"],
     mark: "sphere",
     symbol: "/marca/jireh-energia-simbolo.png",
     logo: "/marca/jireh-energia.png",
@@ -179,6 +188,8 @@ export const brands: Brand[] = [
       },
     ],
     accent: "jirehmac",
+    // verde-limão -> amarelo, as duas pontas do raio
+    aurora: ["#86CE2E", "#EFE23C"],
     mark: "bolt-sphere",
     symbol: "/marca/jireh-mac-simbolo.png",
     logo: "/marca/jireh-mac.png",
@@ -218,6 +229,8 @@ export const brands: Brand[] = [
       },
     ],
     accent: "abest",
+    // vermelho -> coral, clareando o mesmo matiz
+    aurora: ["#E8151C", "#FF7A5A"],
     mark: "node-bolt",
     symbol: "/marca/abest-simbolo.png",
     logo: "/marca/abest.png",
@@ -272,6 +285,8 @@ export const brands: Brand[] = [
       },
     ],
     accent: "mobi",
+    // violeta -> ciano, a leitura elétrica da frente de mobilidade
+    aurora: ["#7257FF", "#21C2F5"],
     mark: "plug",
     // Sem logo ainda: usa o glifo desenhado.
     symbol: "",

@@ -21,8 +21,8 @@ function asset(file: string) {
 const LAMP_MASK =
   "linear-gradient(to bottom, #000 0%, #000 55%, rgba(0,0,0,0.6) 78%, transparent 100%)";
 
-export const Backdrop = () => (
-  <>
+export const Backdrop = ({ filter }: { filter?: string }) => (
+  <div style={{ filter }} className="absolute inset-0">
     <img
       aria-hidden
       src={asset("bg-shapes.png")}
@@ -54,7 +54,7 @@ export const Backdrop = () => (
       aria-hidden
       src={asset("bg-shapes-desktop.png")}
       alt=""
-      className="pointer-events-none absolute top-0 left-0 z-0 hidden h-[731.5px] w-full max-w-none object-cover object-top mix-blend-screen desktop-sm:block"
+      className="pointer-events-none absolute top-0 left-0 z-0 hidden h-[731.5px] w-full max-w-none object-cover object-top mix-blend-screen desktop-sm:top-[62px] desktop-sm:block"
       style={{
         // The export stops at 731.5px; on a taller stage that hard bottom edge
         // reads as a brightness step across the whole width once screen-blended.
@@ -76,5 +76,5 @@ export const Backdrop = () => (
       alt=""
       className="pointer-events-none absolute inset-0 z-0 hidden size-full max-w-none object-cover object-top mix-blend-screen desktop-sm:block ultrawide:h-270"
     />
-  </>
+  </div>
 );

@@ -37,6 +37,8 @@
   --color-solar-ink: #c93000;
   --color-solar-lit: #ff4b12;
   --color-amber: #ffa033;
+  /* Azul do logotipo da SR — usado no teste de tom do hero. */
+  --color-srblue: #2b8fe8;
 
   /* --- Acentos de sub-marca (só nas páginas de marca) ---------------------- */
   --color-sr: #ff4b12;

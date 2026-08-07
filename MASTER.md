@@ -167,6 +167,28 @@ Quanto mais ao fundo, mais a camada fica para trás da rolagem — é daí que v
 profundidade. O **Lenis** dirige a rolagem para que o `scrub` ande contínuo em
 vez de saltar no passo dos eventos de roda.
 
+### A aurora das páginas de marca
+
+Cada página de empresa abre com o **SoftAurora** (react-bits, shader em `ogl`)
+no par de cores da própria marca, tirado do logotipo — nunca inventado:
+
+| Marca | Par |
+|---|---|
+| SR Energia | laranja `#FF4B12` → âmbar `#FFA033` |
+| Jireh Energia | ciano `#21C2F5` → azul profundo `#0A46B4` |
+| JirehMac | verde-limão `#86CE2E` → amarelo `#EFE23C` |
+| ABEST | vermelho `#E8151C` → coral `#FF7A5A` |
+| Mobilidade Elétrica | violeta `#7257FF` → ciano `#21C2F5` |
+
+A faixa fica no terço superior (`bandHeight: 0.82`) e a base escurece: com a
+aurora correndo atrás do título, o kicker no acento da marca caía sobre a
+própria cor e sumia.
+
+O componente foi portado do original com três mudanças: respeita
+`prefers-reduced-motion` renderizando um único quadro estático, **pausa fora da
+viewport** (o original queima GPU enquanto o visitante lê o rodapé) e não
+responde ao mouse — aqui é plano de fundo atrás de texto, não brinquedo.
+
 ### Reduced motion
 
 Sob `prefers-reduced-motion: reduce`: durações caem para `0.01ms`, os reveals

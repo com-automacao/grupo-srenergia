@@ -57,7 +57,18 @@ const CORE_FILL =
 const CORE_MASK =
   "radial-gradient(circle var(--hole-r, 0px) at var(--hole-x, 50%) var(--hole-y, 50%), transparent 0%, transparent 68%, rgba(0,0,0,0.55) 86%, #000 100%)";
 
-export const Orb = () => {
+export const Orb = ({
+  color = "#FF4B12",
+  /**
+   * Filtro CSS aplicado ao halo. O MaskGroup traz laranja cravado no SVG
+   * (#F06B49 / #ED3D11 / #D96811), entao trocar so o `color` da esfera deixava
+   * um anel laranja em volta de um orbe de outra cor.
+   */
+  glowFilter,
+}: {
+  color?: string;
+  glowFilter?: string;
+}) => {
   const coreRef = useRef<HTMLDivElement>(null);
 
   /**
@@ -130,13 +141,13 @@ export const Orb = () => {
       {/* Sphere box — every layer below sits in the same grid cell, centred */}
       <div className="relative grid h-[197.32px] w-[215.853px] shrink-0 place-items-center ipad:h-[280.18px] ipad:w-[306.495px] desktop-sm:h-[311px] desktop-sm:w-[340px]">
         {/* Glow behind the sphere — MaskGroup anchors to a zero-size point */}
-        <div className="relative z-0 col-start-1 row-start-1 size-0 blur-md ipad:hidden">
+        <div style={{ filter: glowFilter }} className="relative z-0 col-start-1 row-start-1 size-0 blur-md ipad:hidden">
           <MaskGroup size={SPHERE_DIAMETER} />
         </div>
-        <div className="relative z-0 col-start-1 row-start-1 hidden size-0 blur-md ipad:block desktop-sm:hidden">
+        <div style={{ filter: glowFilter }} className="relative z-0 col-start-1 row-start-1 hidden size-0 blur-md ipad:block desktop-sm:hidden">
           <MaskGroup size={SPHERE_DIAMETER_TABLET} />
         </div>
-        <div className="relative z-0 col-start-1 row-start-1 hidden size-0 -translate-y-8 blur-md desktop-sm:block">
+        <div style={{ filter: glowFilter }} className="relative z-0 col-start-1 row-start-1 hidden size-0 -translate-y-8 blur-md desktop-sm:block">
           <MaskGroup size={SPHERE_DIAMETER_DESKTOP} />
         </div>
 
@@ -191,7 +202,7 @@ export const Orb = () => {
             cursorRadiusUI={75}
             cursorStrengthUI={10}
             clickForce={5}
-            sphereColor="#FF4B12"
+            sphereColor={color}
           />
         </div>
       </div>

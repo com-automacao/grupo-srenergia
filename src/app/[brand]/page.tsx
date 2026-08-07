@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { accentClasses, brands, getBrand } from "@/lib/brands";
 import { BrandGlyph } from "@/components/BrandGlyph";
+import { SoftAurora } from "@/components/SoftAurora";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -45,22 +46,39 @@ export default async function BrandPage({ params }: Params) {
     >
       {/* ================= HERO ================= */}
       <section className="on-dark relative overflow-hidden">
+        {/* Aurora em shader, no par de cores da própria marca. Substitui o
+            gradiente radial estático: aqui cada empresa ganha um plano de fundo
+            que é reconhecivelmente dela. */}
+        <div className="pointer-events-none absolute inset-0">
+          <SoftAurora
+            color1={brand.aurora[0]}
+            color2={brand.aurora[1]}
+            speed={0.35}
+            scale={1.4}
+            bandHeight={0.82}
+            bandSpread={0.9}
+            brightness={1.45}
+          />
+        </div>
+
+        {/* A faixa fica no terço superior (bandHeight 0.82) e a base escurece:
+            com a aurora correndo atrás do título, o kicker no acento da marca
+            caía sobre a própria cor e sumia. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 55% 60% at 15% 0%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 65%)",
-          }}
+          className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink-950 via-ink-950/45 to-transparent"
         />
-        {/* Glifo gigante em marca d'água */}
-        <BrandGlyph
-          brand={brand}
-          sizes="420px"
-          className={`pointer-events-none absolute -right-16 top-8 h-[26rem] w-[26rem] opacity-[0.09] ${accent.text}`}
-        />
+        {/* Glifo gigante em marca d'água. O posicionamento vive neste wrapper:
+            passar `absolute` pelo className do BrandGlyph disputaria a
+            propriedade `position` com o `relative` que ele precisa ter. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-16 top-8 h-[26rem] w-[26rem] opacity-[0.09]"
+        >
+          <BrandGlyph brand={brand} sizes="420px" className={`h-full w-full ${accent.text}`} />
+        </div>
 
-        <div className="container-page relative pb-20 pt-36 lg:pb-28 lg:pt-44">
+        <div className="container-page relative flex min-h-[70svh] flex-col justify-end pb-20 pt-36 lg:pb-28 lg:pt-44">
           <Reveal>
             <Link
               href="/#ecossistema"
