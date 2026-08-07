@@ -209,6 +209,16 @@ tagline, três competências e o link. No hover o fundo esquenta para `cream-100
 a régua do acento se estende de 0 a 100% via `transform` — nunca via `width`,
 que é propriedade de layout.
 
+**CTA de marca** (`SlideGlowButton`) — o botão principal das páginas de
+empresa. Em repouso é um pill de rótulo sólido; no hover uma cópia acesa no
+acento da marca desliza da esquerda via `clip-path`, e a borda acende junto.
+
+A referência deixava o rótulo em repouso **vazado** (`-webkit-text-stroke`),
+preenchendo só no hover. Aqui não: contorno fino sobre fundo escuro reprova em
+contraste com folga, e um CTA precisa ser legível antes de alguém apontar o
+mouse. O brilho é o que o hover acrescenta — a leitura nunca depende dele. E é
+um `<a>`, não um `<button>`: ele navega.
+
 **Header** — cápsula flutuante que encolhe de 80 para 64px e ganha superfície ao
 rolar, em vez de virar uma barra colada no topo.
 

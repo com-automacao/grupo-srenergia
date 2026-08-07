@@ -69,6 +69,7 @@ src/
 │  ├─ SmoothScroll.tsx      Lenis + sincronia com o ScrollTrigger
 │  ├─ SoftAurora.tsx       Aurora em shader — hero das páginas de marca
 │  ├─ aurora-shader.ts     GLSL do SoftAurora (react-bits)
+│  ├─ SlideGlowButton.tsx   CTA das páginas de marca, com brilho deslizante
 │  ├─ BrandCard.tsx         Célula de marca, com o logotipo completo
 │  ├─ BrandLockup.tsx       Logotipo oficial completo
 │  ├─ BrandGlyph.tsx        Símbolo oficial, com fallback no glifo SVG

@@ -258,6 +258,60 @@
     transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
   }
 
+
+  /* ----- Botão CTA com brilho deslizante -----------------------------------
+     Em repouso o rótulo é sólido e legível; no hover uma cópia acesa no acento
+     da marca desliza da esquerda, revelada por `clip-path`.
+
+     A versão de referência deste efeito deixa o texto em repouso vazado
+     (`-webkit-text-stroke`), o que reprova em contraste com folga — texto de
+     contorno fino sobre fundo escuro fica ilegível. Aqui o estado de repouso é
+     sólido e o brilho é o que entra no hover: o efeito continua, a leitura não
+     depende dele. */
+  .slide-glow {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .slide-glow__glow {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: inherit;
+    color: var(--glow, var(--accent));
+    text-shadow:
+      0 0 6px color-mix(in srgb, var(--glow, var(--accent)) 70%, transparent),
+      0 0 22px color-mix(in srgb, var(--glow, var(--accent)) 45%, transparent);
+    /* Anima `clip-path`, não `width`: largura é propriedade de layout. */
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 420ms var(--ease-out);
+  }
+
+  .slide-glow:hover .slide-glow__glow,
+  .slide-glow:focus-visible .slide-glow__glow {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* A borda acompanha o brilho. */
+  .slide-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid var(--glow, var(--accent));
+    opacity: 0;
+    transition: opacity 420ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  .slide-glow:hover::after,
+  .slide-glow:focus-visible::after {
+    opacity: 1;
+  }
+
   /* ----- Link com sublinhado que cresce da esquerda ------------------------- */
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
@@ -299,5 +353,10 @@
 
   .js .energy-path {
     stroke-dashoffset: 0;
+  }
+
+  .slide-glow:hover .slide-glow__glow,
+  .slide-glow:focus-visible .slide-glow__glow {
+    clip-path: inset(0 0 0 0);
   }
 }

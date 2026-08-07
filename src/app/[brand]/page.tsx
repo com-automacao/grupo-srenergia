@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { accentClasses, brands, getBrand } from "@/lib/brands";
 import { BrandGlyph } from "@/components/BrandGlyph";
 import { SoftAurora } from "@/components/SoftAurora";
+import { SlideGlowButton } from "@/components/SlideGlowButton";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -42,6 +43,7 @@ export default async function BrandPage({ params }: Params) {
       style={{
         ["--accent" as string]: `var(--color-${brand.accent})`,
         ["--accent-ink" as string]: `var(--color-${brand.accent}-ink)`,
+        ["--accent-lit" as string]: `var(--color-${brand.accent}-lit)`,
       }}
     >
       {/* ================= HERO ================= */}
@@ -105,9 +107,9 @@ export default async function BrandPage({ params }: Params) {
 
           <Reveal index={4}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <ButtonLink href="/contato" variant="on-dark">
-                Falar com a {brand.name}
-              </ButtonLink>
+              <SlideGlowButton href="/contato" tone="dark">
+                {`Falar com a ${brand.name}`}
+              </SlideGlowButton>
               <ButtonLink href="#atuacao" variant="ghost" className="text-white">
                 Ver o que fazemos
               </ButtonLink>
@@ -236,9 +238,9 @@ export default async function BrandPage({ params }: Params) {
             <p className="mx-auto mt-5 max-w-[52ch] text-ink-600">
               Descreva a sua necessidade e direcionamos para a frente certa do grupo.
             </p>
-            <ButtonLink href="/contato" variant="accent" className={`mt-8 ${accent.btn}`}>
+            <SlideGlowButton href="/contato" tone="light" className="mt-8">
               Falar com o grupo
-            </ButtonLink>
+            </SlideGlowButton>
           </Reveal>
         </div>
       </section>
