@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Grupo SR Energia — tokens do design system
+   Fonte de verdade: MASTER.md. Nenhum valor aqui é arbitrário.
+   ========================================================================== */
+
+@theme {
+  /* --- Azul-noite: espinha institucional ---------------------------------- */
+  --color-ink-950: #050b18;
+  --color-ink-900: #0a1224;
+  --color-ink-800: #111c33;
+  --color-ink-700: #1b2a47;
+  --color-ink-500: #4a5e82;
+  --color-ink-300: #93a4c0;
+
+  /* --- Claro: onde o conteúdo respira ------------------------------------- */
+  --color-paper-0: #ffffff;
+  --color-paper-50: #f6f8fb;
+  --color-paper-100: #edf1f7;
+  --color-paper-200: #dde4ee;
+  --color-paper-600: #5a6880;
+  --color-paper-900: #0b1220;
+
+  /* --- Azul de marca do Grupo --------------------------------------------- */
+  --color-brand-700: #0a46b4;
+  --color-brand-600: #1f76d2;
+  --color-brand-500: #2b8fe8;
+  --color-brand-400: #5aaef5;
+
+  /* --- Acentos de sub-marca (herdados dos logos) -------------------------- */
+  --color-sr: #ff4b12;
+  --color-sr-ink: #c42f00;
+  --color-jireh: #21c2f5;
+  --color-jireh-ink: #0b7fa8;
+  --color-jirehmac: #86ce2e;
+  --color-jirehmac-ink: #4a7a0e;
+  --color-abest: #ea1b22;
+  --color-abest-ink: #c2141a;
+  --color-mobi: #7b61ff;
+  --color-mobi-ink: #5333e8;
+
+  /* --- Semânticos ---------------------------------------------------------- */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+
+  /* --- Tipografia ---------------------------------------------------------- */
+  --font-display: var(--font-sora), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --text-display: clamp(2.75rem, 6.5vw, 5.5rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.04em;
+  --text-display--font-weight: 800;
+
+  --text-h1: clamp(2.25rem, 4.5vw, 3.75rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h1--font-weight: 800;
+
+  --text-h2: clamp(1.75rem, 3vw, 2.75rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: clamp(1.25rem, 1.8vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 700;
+
+  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
+  --text-lead--line-height: 1.55;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.6;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.16em;
+  --text-eyebrow--font-weight: 600;
+
+  /* --- Raio ---------------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* --- Elevação (hairline-first) ------------------------------------------ */
+  --shadow-1: 0 1px 2px rgb(11 18 32 / 0.04);
+  --shadow-2: 0 4px 16px -4px rgb(11 18 32 / 0.08);
+  --shadow-3: 0 12px 32px -8px rgb(11 18 32 / 0.12);
+
+  /* --- Motion -------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  /* Layout — não são cores, ficam fora do namespace de cor */
+  --container-narrow: 760px;
+}
+
+:root {
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 320ms;
+  --dur-draw: 1100ms;
+  --stagger: 60ms;
+
+  --space-section: clamp(5rem, 10vw, 10rem);
+  --space-block: clamp(2.5rem, 5vw, 4rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+
+  /* Acento da seção corrente. Cada página/seção redefine. */
+  --accent: var(--color-brand-600);
+  --accent-ink: var(--color-brand-700);
+}
+
+/* ============================================================================
+   Base
+   ========================================================================== */
+
+* {
+  border-color: var(--color-paper-200);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Compensa o header fixo ao pular para âncoras */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper-50);
+  color: var(--color-paper-900);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Foco: nunca removido, sempre no acento da seção. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Em superfície escura o acento pode não ter contraste suficiente com o preto:
+   o anel usa branco por baixo para garantir visibilidade em qualquer acento. */
+.on-dark :focus-visible {
+  outline-color: #fff;
+}
+
+/* ============================================================================
+   Utilitários do sistema
+   ========================================================================== */
+
+.container-page {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--space-section);
+}
+
+.measure {
+  max-width: 68ch;
+}
+
+/* Superfície escura: inverte a semântica de texto dos filhos. */
+.on-dark {
+  background: var(--color-ink-950);
+  color: #fff;
+}
+
+/* ----- Reveal no scroll ---------------------------------------------------- */
+/* O estado escondido depende da classe .js, aplicada no <html> por um script
+   inline antes da primeira pintura. Sem JS o conteúdo nasce visível — nada de
+   página em branco se o script falhar. */
+.js [data-reveal="armed"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
+    transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+/* ----- Linhas de energia --------------------------------------------------- */
+/* Os paths declaram pathLength="1", então o comprimento é normalizado e não
+   precisamos medir nada em JS. */
+.js .energy-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.js [data-draw="in"] .energy-path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
+}
+
+/* ----- Link com sublinhado que cresce da esquerda -------------------------- */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size var(--dur-fast) var(--ease-out);
+}
+
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* ============================================================================
+   Reduced motion — nenhum conteúdo depende de animação para ser lido.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .js [data-reveal="armed"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .energy-path {
+    stroke-dashoffset: 0;
+  }
+}
