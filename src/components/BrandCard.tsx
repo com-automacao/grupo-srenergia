@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { accentClasses, type Brand } from "@/lib/brands";
-import { BrandMark } from "./BrandMark";
+import { BrandGlyph } from "./BrandGlyph";
 import { Arrow } from "./ui";
 
 /**
@@ -23,7 +23,7 @@ export function BrandCard({ brand }: { brand: Brand }) {
         className={`absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 transition-transform duration-320 ease-out group-hover:scale-x-100 ${accent.bg}`}
       />
 
-      <BrandMark mark={brand.mark} className={`h-11 w-11 ${accent.text}`} />
+      <BrandGlyph brand={brand} sizes="48px" className={`h-11 w-11 ${accent.text}`} />
 
       <h3 className="mt-6 font-display text-h3 text-white">{brand.name}</h3>
       <p className={`mt-1.5 text-sm font-medium ${accent.text}`}>{brand.kicker}</p>

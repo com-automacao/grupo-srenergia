@@ -31,9 +31,17 @@ export type Brand = {
   services: { title: string; description: string }[];
   /** Token de cor Tailwind, sem o prefixo. Ex.: "sr" → text-sr / bg-sr. */
   accent: "sr" | "jireh" | "jirehmac" | "abest" | "mobi";
-  /** Glifo desenhado em SVG (ver components/BrandMark.tsx). */
+  /**
+   * Glifo desenhado em SVG. Só entra em cena quando a marca não tem símbolo
+   * próprio — hoje, apenas a Mobilidade Elétrica.
+   */
   mark: "sr" | "sphere" | "bolt-sphere" | "node-bolt" | "plug";
-  /** Mockup atual — substituir por SVG/PNG transparente. */
+  /**
+   * Símbolo oficial, recortado do logo e quadrado em 256px. Vazio quando a
+   * marca ainda não tem logo, e aí o `mark` assume.
+   */
+  symbol: string;
+  /** Logotipo completo (símbolo + tipografia). Só legível sobre fundo claro. */
   logo: string;
 };
 
@@ -84,7 +92,8 @@ export const brands: Brand[] = [
     ],
     accent: "sr",
     mark: "sr",
-    logo: "/logo-srenergia.png",
+    symbol: "/marca/srenergia-simbolo.png",
+    logo: "/marca/srenergia.png",
   },
   {
     slug: "jireh-energia",
@@ -122,7 +131,8 @@ export const brands: Brand[] = [
     ],
     accent: "jireh",
     mark: "sphere",
-    logo: "/logo-jireh-energia.png",
+    symbol: "/marca/jireh-energia-simbolo.png",
+    logo: "/marca/jireh-energia.png",
   },
   {
     slug: "jirehmac",
@@ -170,7 +180,8 @@ export const brands: Brand[] = [
     ],
     accent: "jirehmac",
     mark: "bolt-sphere",
-    logo: "/logo-jireh-mac.png",
+    symbol: "/marca/jireh-mac-simbolo.png",
+    logo: "/marca/jireh-mac.png",
   },
   {
     slug: "abest",
@@ -208,7 +219,8 @@ export const brands: Brand[] = [
     ],
     accent: "abest",
     mark: "node-bolt",
-    logo: "/logo-abest.png",
+    symbol: "/marca/abest-simbolo.png",
+    logo: "/marca/abest.png",
   },
   {
     slug: "mobilidade-eletrica",
@@ -261,6 +273,8 @@ export const brands: Brand[] = [
     ],
     accent: "mobi",
     mark: "plug",
+    // Sem logo ainda: usa o glifo desenhado.
+    symbol: "",
     logo: "",
   },
 ];

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { accentClasses, brands, getBrand } from "@/lib/brands";
-import { BrandMark } from "@/components/BrandMark";
+import { BrandGlyph } from "@/components/BrandGlyph";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -54,9 +54,10 @@ export default async function BrandPage({ params }: Params) {
           }}
         />
         {/* Glifo gigante em marca d'água */}
-        <BrandMark
-          mark={brand.mark}
-          className={`pointer-events-none absolute -right-16 top-8 h-[26rem] w-[26rem] opacity-[0.07] ${accent.text}`}
+        <BrandGlyph
+          brand={brand}
+          sizes="420px"
+          className={`pointer-events-none absolute -right-16 top-8 h-[26rem] w-[26rem] opacity-[0.09] ${accent.text}`}
         />
 
         <div className="container-page relative pb-20 pt-36 lg:pb-28 lg:pt-44">
@@ -71,7 +72,7 @@ export default async function BrandPage({ params }: Params) {
 
           <Reveal index={1}>
             <div className="mt-10 flex items-center gap-4">
-              <BrandMark mark={brand.mark} className={`h-14 w-14 shrink-0 ${accent.text}`} />
+              <BrandGlyph brand={brand} sizes="56px" className={`h-14 w-14 ${accent.text}`} />
               <h1 className="font-display text-h1 text-white text-balance">{brand.name}</h1>
             </div>
           </Reveal>
@@ -184,8 +185,9 @@ export default async function BrandPage({ params }: Params) {
                     href={`/${other.slug}`}
                     className={`group flex h-full flex-col rounded-lg border border-ink-800 bg-ink-900 p-6 transition-[border-color,transform] duration-240 ease-out hover:-translate-y-0.5 ${otherAccent.borderHover}`}
                   >
-                    <BrandMark
-                      mark={other.mark}
+                    <BrandGlyph
+                      brand={other}
+                      sizes="32px"
                       className={`h-8 w-8 ${otherAccent.text}`}
                     />
                     <h3 className="mt-5 font-display text-base font-bold text-white">

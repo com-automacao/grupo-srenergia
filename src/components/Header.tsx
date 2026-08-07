@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { companies, mobility, accentClasses } from "@/lib/brands";
 import { GroupLogo } from "./GroupLogo";
-import { BrandMark } from "./BrandMark";
+import { BrandGlyph } from "./BrandGlyph";
 import { ButtonLink } from "./ui";
 
 /**
@@ -136,9 +136,10 @@ export function Header() {
                       href={`/${brand.slug}`}
                       className="group flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
                     >
-                      <BrandMark
-                        mark={brand.mark}
-                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.textInk}`}
+                      <BrandGlyph
+                        brand={brand}
+                        sizes="24px"
+                        className={`mt-0.5 h-6 w-6 ${accent.textInk}`}
                       />
                       <span className="min-w-0">
                         <span className="block font-display text-sm font-bold">
@@ -225,9 +226,10 @@ export function Header() {
                       href={`/${brand.slug}`}
                       className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
                     >
-                      <BrandMark
-                        mark={brand.mark}
-                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.textInk}`}
+                      <BrandGlyph
+                        brand={brand}
+                        sizes="24px"
+                        className={`mt-0.5 h-6 w-6 ${accent.textInk}`}
                       />
                       <span>
                         <span className="block font-display font-bold">{brand.name}</span>
@@ -248,7 +250,7 @@ export function Header() {
                   href={`/${mobility.slug}`}
                   className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
                 >
-                  <BrandMark mark={mobility.mark} className="mt-0.5 h-6 w-6 shrink-0 text-mobi-ink" />
+                  <BrandGlyph brand={mobility} sizes="24px" className="mt-0.5 h-6 w-6 text-mobi-ink" />
                   <span>
                     <span className="block font-display font-bold">{mobility.name}</span>
                     <span className="block text-sm leading-snug text-paper-600">

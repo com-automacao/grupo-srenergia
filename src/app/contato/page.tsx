@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { accentClasses, brands } from "@/lib/brands";
 import { CONTACT, hasWhatsapp, hasEmail, whatsappUrl } from "@/lib/contact";
-import { BrandMark } from "@/components/BrandMark";
+import { BrandGlyph } from "@/components/BrandGlyph";
 import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { Eyebrow } from "@/components/ui";
@@ -146,7 +146,7 @@ export default function ContatoPage() {
                     href={`/${brand.slug}`}
                     className={`group flex h-full flex-col rounded-lg border border-ink-800 bg-ink-900 p-6 transition-[border-color,transform] duration-240 ease-out hover:-translate-y-0.5 ${accent.borderHover}`}
                   >
-                    <BrandMark mark={brand.mark} className={`h-8 w-8 ${accent.text}`} />
+                    <BrandGlyph brand={brand} sizes="32px" className={`h-8 w-8 ${accent.text}`} />
                     <h3 className="mt-5 font-display text-base font-bold text-white">
                       {brand.name}
                     </h3>

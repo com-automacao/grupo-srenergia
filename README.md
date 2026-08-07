@@ -170,13 +170,20 @@ reflete na home, no menu, no rodapé e na página interna ao mesmo tempo.
 
 Itens que dependem de material ou informação do cliente:
 
-- [ ] **Logos em vetor.** Os arquivos em `public/` são mockups renderizados
-      (marca aplicada em parede, com relevo e brilho) — não servem para o site.
-      É preciso SVG ou PNG com fundo transparente, em versão positiva e
-      negativa, das quatro marcas e do Grupo. Enquanto isso, os glifos são
-      desenhados em SVG (`BrandMark.tsx`), fiéis aos símbolos originais.
+- [x] ~~Logos das quatro marcas.~~ Recebidos em PNG transparente 1536×1024. Os
+      **símbolos** foram recortados, quadrados e otimizados para
+      `public/marca/*-simbolo.png` (2 MB → 11–20 KB cada) e são o que o site
+      usa. Os originais seguem em `public/logo-*.png`.
+- [ ] **Versão negativa dos logotipos.** O logotipo completo das marcas tem
+      tipografia em azul-marinho e grafite, que somem no azul-noite — por isso o
+      site aplica o símbolo mais o nome na tipografia própria, e não o lockup
+      inteiro. Uma versão negativa permitiria usar o lockup completo também nas
+      superfícies escuras.
 - [ ] **Marca do Grupo SR Energia.** Ainda não fornecida; o lockup atual é
       tipográfico, usando o arco de grid solar em degradê azul→laranja.
+- [ ] **Símbolo da Mobilidade Elétrica.** Única frente sem marca — usa um glifo
+      desenhado em SVG (`BrandMark.tsx`), que o `BrandGlyph` aciona como
+      fallback automático quando `symbol` está vazio.
 - [ ] **Dados de contato.** E-mail, telefone, WhatsApp, endereço, horário e
       redes sociais — preencher em
       [`src/lib/contact.ts`](src/lib/contact.ts). Enquanto estiverem vazios, o
