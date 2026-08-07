@@ -76,7 +76,8 @@ export function ScrollExpandVideo({
       observer.observe(root);
     }
 
-    // Sem movimento: a seção nasce aberta e em cores plenas.
+    // Sem movimento: a seção nasce aberta e em cores plenas. Os véus ficam —
+    // aqui o título não se dissolve, então continua precisando de fundo.
     if (reduced) {
       const media = root.querySelector<HTMLElement>(".sev-media");
       const vid = root.querySelector<HTMLElement>(".sev-video");
@@ -100,8 +101,27 @@ export function ScrollExpandVideo({
       });
 
       open
-        .fromTo(".sev-media", { clipPath: CLOSED }, { clipPath: OPEN, ease: "none" }, 0)
-        .fromTo(".sev-video", { filter: DRAINED }, { filter: VIVID, ease: "none" }, 0);
+        .fromTo(
+          ".sev-media",
+          { clipPath: CLOSED },
+          { clipPath: OPEN, ease: "none", duration: 1 },
+          0,
+        )
+        .fromTo(
+          ".sev-video",
+          { filter: DRAINED },
+          { filter: VIVID, ease: "none", duration: 1 },
+          0,
+        )
+        // Os véus saem antes da abertura terminar: eles só existem para
+        // sustentar o texto, e o texto se dissolve em 0.44 da linha do tempo.
+        // Em tela cheia o quadro fica limpo, sem sombreamento nenhum.
+        .fromTo(
+          ".sev-scrim",
+          { opacity: 1 },
+          { opacity: 0, ease: "none", duration: 0.6 },
+          0,
+        );
 
       // O título recua enquanto o vídeo toma a tela.
       gsap.to(".sev-copy", {
@@ -140,16 +160,18 @@ export function ScrollExpandVideo({
           <source src={src1080} type="video/mp4" />
         </video>
 
-        {/* Dois véus. O vertical assenta topo e base; o da esquerda é o que
-            sustenta o texto — o vídeo é um sobrevoo sobre grama e terra clara,
-            e sobre esses quadros o creme e o laranja do eyebrow sumiriam. */}
+        {/* Dois véus, que somem antes da abertura terminar. O vertical assenta
+            topo e base; o da esquerda é o que sustenta o texto — o vídeo é um
+            sobrevoo sobre grama e terra clara, e sobre esses quadros o creme e
+            o laranja do eyebrow sumiriam. Com o título já dissolvido, nada
+            justifica manter sombra sobre o quadro em tela cheia. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-linear-to-b from-ink-950/60 via-transparent to-ink-950/75"
+          className="sev-scrim pointer-events-none absolute inset-0 bg-linear-to-b from-ink-950/60 via-transparent to-ink-950/75"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-linear-to-r from-ink-950/92 via-ink-950/55 to-ink-950/10"
+          className="sev-scrim pointer-events-none absolute inset-0 bg-linear-to-r from-ink-950/92 via-ink-950/55 to-ink-950/10"
         />
       </div>
 

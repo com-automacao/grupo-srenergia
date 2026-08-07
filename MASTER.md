@@ -202,6 +202,11 @@ Dois véus sustentam o texto: o vertical assenta topo e base, o da esquerda é o
 que garante a leitura. O vídeo é um sobrevoo sobre grama e terra clara, e sobre
 esses quadros o creme e o laranja do eyebrow sumiriam.
 
+**Os véus saem antes da abertura terminar.** Eles existem para o texto, e o
+texto se dissolve em 0,44 da linha do tempo — manter sombra sobre o quadro em
+tela cheia seria sujeira sem função. A exceção é `prefers-reduced-motion`: ali o
+título não se dissolve, então os véus ficam.
+
 O vídeo só toca quando está na tela, e nunca sob `prefers-reduced-motion` —
 nesse caso a seção nasce aberta, com o pôster no lugar.
 
