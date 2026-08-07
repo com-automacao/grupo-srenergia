@@ -154,6 +154,7 @@ export default function Home() {
               </p>
               <ButtonLink
                 href={`/${mobility.slug}`}
+                variant="accent"
                 className="mt-9 bg-mobi hover:bg-mobi-ink"
               >
                 Ver soluções de recarga

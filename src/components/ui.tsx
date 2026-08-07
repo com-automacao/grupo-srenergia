@@ -25,7 +25,7 @@ export function Eyebrow({
   );
 }
 
-type ButtonVariant = "primary" | "on-dark" | "ghost";
+type ButtonVariant = "primary" | "accent" | "on-dark" | "ghost";
 
 const buttonBase =
   "inline-flex h-12 items-center justify-center gap-2 rounded-md px-6 text-sm font-semibold " +
@@ -35,6 +35,9 @@ const buttonBase =
 const buttonVariants: Record<ButtonVariant, string> = {
   primary:
     "bg-brand-600 text-white hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-2",
+  // Sem fundo próprio: quem chama passa `accentClasses[...].btn`, evitando que
+  // duas classes de background disputem precedência na folha de estilo.
+  accent: "text-white hover:-translate-y-0.5 hover:shadow-2",
   "on-dark":
     "bg-white text-ink-950 hover:-translate-y-0.5 hover:bg-paper-100 hover:shadow-2",
   // Herda a cor do contexto (claro ou escuro) e só empresta 25% dela à borda.

@@ -289,6 +289,8 @@ export const accentClasses: Record<
     borderHover: string;
     ring: string;
     stroke: string;
+    /** Botao solido no acento da marca (usar com <ButtonLink variant="accent">). */
+    btn: string;
   }
 > = {
   sr: {
@@ -300,6 +302,7 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-sr",
     ring: "[--accent:var(--color-sr)]",
     stroke: "stroke-sr",
+    btn: "bg-sr hover:bg-sr-ink",
   },
   jireh: {
     text: "text-jireh",
@@ -310,6 +313,7 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-jireh",
     ring: "[--accent:var(--color-jireh)]",
     stroke: "stroke-jireh",
+    btn: "bg-jireh hover:bg-jireh-ink",
   },
   jirehmac: {
     text: "text-jirehmac",
@@ -320,6 +324,7 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-jirehmac",
     ring: "[--accent:var(--color-jirehmac)]",
     stroke: "stroke-jirehmac",
+    btn: "bg-jirehmac hover:bg-jirehmac-ink",
   },
   abest: {
     text: "text-abest",
@@ -330,6 +335,7 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-abest",
     ring: "[--accent:var(--color-abest)]",
     stroke: "stroke-abest",
+    btn: "bg-abest hover:bg-abest-ink",
   },
   mobi: {
     text: "text-mobi",
@@ -340,5 +346,6 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-mobi",
     ring: "[--accent:var(--color-mobi)]",
     stroke: "stroke-mobi",
+    btn: "bg-mobi hover:bg-mobi-ink",
   },
 };

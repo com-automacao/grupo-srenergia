@@ -122,114 +122,126 @@
 
 /* ============================================================================
    Base
+   ---------------------------------------------------------------------------
+   Tudo aqui vive em @layer base. Sem a layer, estas regras ficariam FORA das
+   cascade layers do Tailwind e venceriam todas as utilities — o seletor `*`
+   abaixo, por exemplo, sobrescreveria qualquer `border-*` aplicado nas
+   classes. Dentro da layer, a utility sempre ganha.
    ========================================================================== */
 
-* {
-  border-color: var(--color-paper-200);
-}
+@layer base {
+  * {
+    border-color: var(--color-paper-200);
+  }
 
-html {
-  scroll-behavior: smooth;
-  /* Compensa o header fixo ao pular para âncoras */
-  scroll-padding-top: 6rem;
-  -webkit-text-size-adjust: 100%;
-}
+  html {
+    scroll-behavior: smooth;
+    /* Compensa o header fixo ao pular para âncoras */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
 
-body {
-  background: var(--color-paper-50);
-  color: var(--color-paper-900);
-  font-family: var(--font-sans);
-  font-size: var(--text-body);
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
+  body {
+    background: var(--color-paper-50);
+    color: var(--color-paper-900);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 
-::selection {
-  background: var(--accent);
-  color: #fff;
-}
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
 
-/* Foco: nunca removido, sempre no acento da seção. */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
+  /* Foco: nunca removido, sempre no acento da seção. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 
-/* Em superfície escura o acento pode não ter contraste suficiente com o preto:
-   o anel usa branco por baixo para garantir visibilidade em qualquer acento. */
-.on-dark :focus-visible {
-  outline-color: #fff;
+  /* Em superfície escura o acento pode não ter contraste suficiente com o preto:
+     o anel usa branco por baixo para garantir visibilidade em qualquer acento. */
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
 }
 
 /* ============================================================================
    Utilitários do sistema
+   ---------------------------------------------------------------------------
+   Em @layer components para que qualquer utility do Tailwind aplicada no mesmo
+   elemento tenha a palavra final (ex.: `bg-paper-50` sobre `.on-dark`).
    ========================================================================== */
 
-.container-page {
-  width: 100%;
-  max-width: 1240px;
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
 
-.section {
-  padding-block: var(--space-section);
-}
+  .section {
+    padding-block: var(--space-section);
+  }
 
-.measure {
-  max-width: 68ch;
-}
+  .measure {
+    max-width: 68ch;
+  }
 
-/* Superfície escura: inverte a semântica de texto dos filhos. */
-.on-dark {
-  background: var(--color-ink-950);
-  color: #fff;
-}
+  /* Superfície escura: inverte a semântica de texto dos filhos. */
+  .on-dark {
+    background: var(--color-ink-950);
+    color: #fff;
+  }
 
-/* ----- Reveal no scroll ---------------------------------------------------- */
-/* O estado escondido depende da classe .js, aplicada no <html> por um script
-   inline antes da primeira pintura. Sem JS o conteúdo nasce visível — nada de
-   página em branco se o script falhar. */
-.js [data-reveal="armed"] {
-  opacity: 0;
-  transform: translateY(16px);
-}
+  /* ----- Reveal no scroll ---------------------------------------------------- */
+  /* O estado escondido depende da classe .js, aplicada no <html> por um script
+     inline antes da primeira pintura. Sem JS o conteúdo nasce visível — nada de
+     página em branco se o script falhar. */
+  .js [data-reveal="armed"] {
+    opacity: 0;
+    transform: translateY(16px);
+  }
 
-[data-reveal="in"] {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
-    transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
-}
+  [data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms),
+      transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
+  }
 
-/* ----- Linhas de energia --------------------------------------------------- */
-/* Os paths declaram pathLength="1", então o comprimento é normalizado e não
-   precisamos medir nada em JS. */
-.js .energy-path {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-}
+  /* ----- Linhas de energia --------------------------------------------------- */
+  /* Os paths declaram pathLength="1", então o comprimento é normalizado e não
+     precisamos medir nada em JS. */
+  .js .energy-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
 
-.js [data-draw="in"] .energy-path {
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
-}
+  .js [data-draw="in"] .energy-path {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
+  }
 
-/* ----- Link com sublinhado que cresce da esquerda -------------------------- */
-.link-underline {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size var(--dur-fast) var(--ease-out);
-}
+  /* ----- Link com sublinhado que cresce da esquerda -------------------------- */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size var(--dur-fast) var(--ease-out);
+  }
 
-.link-underline:hover,
-.link-underline:focus-visible {
-  background-size: 100% 1px;
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
 }
 
 /* ============================================================================

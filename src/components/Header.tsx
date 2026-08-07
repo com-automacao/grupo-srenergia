@@ -28,11 +28,15 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Fecha tudo ao navegar.
-  useEffect(() => {
+  // Fecha tudo ao navegar. Ajustar estado durante o render (e não em um efeito)
+  // evita o render em cascata: o React descarta este render e refaz com os
+  // menus já fechados, antes de qualquer pintura.
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
     setMenuOpen(false);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   // Dropdown: fecha no Escape e no clique fora.
   useEffect(() => {
