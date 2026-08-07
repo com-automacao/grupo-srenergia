@@ -220,6 +220,7 @@ sombra só reforça.
 | Padrão | Especificação |
 |---|---|
 | Reveal no scroll | `opacity 0→1` + `translateY(16px→0)`, `--dur-slow`, `--ease-out`, stagger 60ms, dispara uma única vez a 12% de visibilidade |
+| Barramento do hero | Cinco fontes convergem em um nó e saem por uma linha só. Trilhos desenham uma vez; depois um pulso curto (`dasharray 0.13 0.87`) percorre cada ramo em loop de 6,5–8,1s, com fases dessincronizadas. Sob reduced motion o pulso **sai de cena** em vez de congelar |
 | Hover em card | borda → acento, `translateY(-2px)`, `--shadow-3`, `--dur-base`. **Sem `scale`** |
 | Hover em link | sublinhado cresce da esquerda, `--dur-fast` |
 | Linhas de energia | `stroke-dashoffset` total→0, `--dur-draw`, `--ease-in-out`, stagger 120ms por ramo |
@@ -260,9 +261,14 @@ Traço de 24px no acento + label uppercase `--text-eyebrow`.
 
 Alternância de regime de luz é estrutural, não decorativa:
 
+O hero é **enxuto por decisão**: eyebrow, um título de seis palavras, uma linha de
+apoio e dois botões. Quem carrega a mensagem é o barramento de energia, não o texto
+— parágrafo longo em hero institucional de energia é exatamente o que o mercado
+inteiro já faz.
+
 | Seção | Regime |
 |---|---|
-| Hero | escuro `--ink-950` |
+| Hero | escuro `--ink-950`, ~90svh, com o barramento convergente |
 | Manifesto do ecossistema | escuro (continuidade) |
 | Grid das 4 marcas | escuro — os acentos brilham |
 | Mobilidade Elétrica | claro `--paper-50` |

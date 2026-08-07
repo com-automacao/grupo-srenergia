@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
+import { EnergyBus } from "@/components/EnergyBus";
 import { EnergyLines } from "@/components/EnergyLines";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
@@ -52,29 +53,31 @@ export default function Home() {
           }}
         />
 
-        <div className="container-page relative pb-24 pt-40 lg:pb-32 lg:pt-52">
+        {/* Barramento: cinco fontes convergindo em uma saída só. Ocupa a metade
+            direita no desktop; no mobile some para não competir com o título. */}
+        <EnergyBus className="pointer-events-none absolute -right-16 top-0 hidden h-full w-[46%] lg:block" />
+
+        <div className="container-page relative flex min-h-[86svh] flex-col justify-center pb-24 pt-36 lg:min-h-[92svh] lg:pb-32">
           <Reveal>
             <Eyebrow className="text-brand-400">Ecossistema de energia</Eyebrow>
           </Reveal>
 
           <Reveal index={1}>
-            <h1 className="mt-7 max-w-[19ch] font-display text-display text-white text-balance">
-              Toda a energia que a sua operação precisa.{" "}
-              <span className="text-brand-400">Em um só grupo.</span>
+            <h1 className="mt-8 max-w-[11ch] font-display text-display text-white text-balance">
+              Toda a energia.{" "}
+              <span className="text-brand-400">Um só grupo.</span>
             </h1>
           </Reveal>
 
           <Reveal index={2}>
-            <p className="measure mt-8 text-lead text-ink-300">
-              O Grupo SR Energia não é uma empresa de energia solar. É um ecossistema
-              de empresas especializadas que cobre o setor de ponta a ponta — do projeto
-              e da instalação de usinas fotovoltaicas à tecnologia própria de geração
-              contínua, engenharia especializada e modelos que reduzem o custo da energia.
+            <p className="mt-8 max-w-[46ch] text-lead text-ink-300">
+              Geração, engenharia, tecnologia própria e mobilidade elétrica em um
+              único ecossistema.
             </p>
           </Reveal>
 
           <Reveal index={3}>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-11 flex flex-wrap gap-3">
               <ButtonLink href="#ecossistema" variant="on-dark">
                 Conheça nossas empresas
               </ButtonLink>
@@ -84,24 +87,8 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* Legenda cromática do ecossistema */}
-          <Reveal index={4}>
-            <ul className="mt-20 flex flex-wrap gap-x-8 gap-y-4 border-t border-ink-800 pt-8">
-              {[...companies, mobility].map((brand) => (
-                <li
-                  key={brand.slug}
-                  className="flex items-center gap-2.5 text-sm text-ink-300"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{ background: `var(--color-${brand.accent})` }}
-                  />
-                  {brand.name}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+          {/* No mobile o barramento entra no fluxo, abaixo dos botões. */}
+          <EnergyBus className="mt-14 h-56 w-full lg:hidden" />
         </div>
       </section>
 

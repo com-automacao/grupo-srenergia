@@ -67,7 +67,8 @@ src/
 │  ├─ BrandCard.tsx         Card de marca com régua de acento no hover
 │  ├─ BrandMark.tsx         Glifos das marcas em SVG
 │  ├─ GroupLogo.tsx         Lockup do Grupo
-│  ├─ EnergyLines.tsx       Assinatura: tronco que se ramifica nas 4 marcas
+│  ├─ EnergyBus.tsx         Hero: 5 fontes convergindo em uma saída
+│  ├─ EnergyLines.tsx       Ecossistema: tronco que se ramifica nas 4 marcas
 │  ├─ ContactForm.tsx
 │  ├─ Reveal.tsx            Reveal no scroll (IntersectionObserver)
 │  └─ ui.tsx                Botões, eyebrow, seta
@@ -128,6 +129,19 @@ está em [`MASTER.md`](MASTER.md) §2.6, junto com as armadilhas já encontradas
 (ex.: `brand-600` reprova sobre `paper-100`; o hover do botão primário escurece
 em vez de clarear, senão o texto branco cairia para 3,4:1 no exato momento de
 uso).
+
+### A assinatura visual
+
+Dois desenhos em SVG carregam o conceito e fazem par entre si:
+
+- **Hero** — cinco fontes descem, convergem em um único nó e saem por uma linha
+  só. É a proposta do grupo dita graficamente: muitas especialidades, uma
+  entrega. Um pulso de luz percorre cada ramo em loop lento e dessincronizado.
+- **Ecossistema** — o caminho inverso: um tronco que se ramifica nas quatro
+  marcas, cada ramo terminando exatamente no centro do card correspondente.
+
+Por isso o hero é curto de texto. Quem comunica é o desenho — parágrafo longo
+em hero de empresa de energia é o que todo concorrente já faz.
 
 ### Motion
 

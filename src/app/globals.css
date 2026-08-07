@@ -245,6 +245,38 @@
     transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
   }
 
+  /* ----- Pulso de energia (hero) --------------------------------------------
+     Um traço curto correndo dentro de um dash gigante: o classico "cometa".
+     Anima so stroke-dashoffset, sem layout e sem JavaScript. */
+  .energy-pulse {
+    stroke-dasharray: 0.13 0.87;
+    stroke-dashoffset: 1;
+    animation: energy-pulse var(--pulse-dur, 7s) linear infinite var(--pulse-delay, 0s);
+  }
+
+  @keyframes energy-pulse {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .bus-node {
+    animation: bus-node-breathe 4s var(--ease-in-out) infinite;
+  }
+
+  @keyframes bus-node-breathe {
+    0%,
+    100% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
   /* ----- Link com sublinhado que cresce da esquerda -------------------------- */
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
@@ -285,5 +317,16 @@
 
   .js .energy-path {
     stroke-dashoffset: 0;
+  }
+
+  /* O pulso é puramente ambiental: sem movimento ele não tem função, então sai
+     de cena em vez de congelar em uma posição arbitrária do trajeto. */
+  .energy-pulse {
+    display: none;
+  }
+
+  .bus-node {
+    animation: none;
+    opacity: 1;
   }
 }
