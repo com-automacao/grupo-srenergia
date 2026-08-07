@@ -20,13 +20,13 @@ const SUBJECTS = [
 ];
 
 const fieldClass =
-  "w-full rounded-md border border-paper-200 bg-paper-0 px-4 py-3 text-body " +
-  "text-paper-900 transition-colors duration-160 placeholder:text-paper-600/70 " +
-  "hover:border-paper-600/40 focus:border-brand-600 focus:outline-none " +
+  "w-full rounded-md border border-cream-300 bg-cream-50 px-4 py-3 text-body " +
+  "text-ink-950 transition-colors duration-160 placeholder:text-ink-600/70 " +
+  "hover:border-ink-500/40 focus:border-solar focus:outline-none " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--accent)] " +
-  "disabled:cursor-not-allowed disabled:bg-paper-100 disabled:text-paper-600";
+  "disabled:cursor-not-allowed disabled:bg-cream-100 disabled:text-ink-600";
 
-const labelClass = "block text-sm font-semibold text-paper-900";
+const labelClass = "block text-sm font-semibold text-ink-950";
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -60,11 +60,11 @@ export function ContactForm() {
       {!hasEmail && (
         <p
           role="status"
-          className="rounded-md border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-paper-900"
+          className="rounded-md border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-ink-950"
         >
           <strong className="font-semibold">Envio ainda não configurado.</strong>{" "}
           O e-mail de destino precisa ser definido em{" "}
-          <code className="rounded-sm bg-paper-100 px-1 py-0.5 text-[0.8125rem]">
+          <code className="rounded-sm bg-cream-100 px-1 py-0.5 text-[0.8125rem]">
             src/lib/contact.ts
           </code>
           . O formulário abaixo já está pronto e funcional.
@@ -166,7 +166,7 @@ export function ContactForm() {
         />
       </div>
 
-      <p className="text-sm text-paper-600">
+      <p className="text-sm text-ink-600">
         Campos marcados com <span aria-hidden="true">*</span>
         <span className="sr-only">asterisco</span> são obrigatórios.
       </p>
@@ -174,12 +174,12 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={!hasEmail}
-        className="inline-flex h-12 items-center justify-center rounded-md bg-brand-600 px-6 text-sm font-semibold text-white transition-[background-color,transform,box-shadow] duration-240 ease-out hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-2 active:translate-y-0 disabled:pointer-events-none disabled:opacity-45"
+        className="inline-flex h-12 items-center justify-center rounded-full bg-solar px-6 text-sm font-medium text-ink-950 transition-[transform,box-shadow] duration-240 ease-out hover:-translate-y-0.5 hover:shadow-2 active:translate-y-0 disabled:pointer-events-none disabled:opacity-45"
       >
         Enviar mensagem
       </button>
 
-      <p aria-live="polite" className="text-sm text-paper-600">
+      <p aria-live="polite" className="text-sm text-ink-600">
         {sent && "Abrimos o seu programa de e-mail com a mensagem pronta para envio."}
       </p>
     </form>

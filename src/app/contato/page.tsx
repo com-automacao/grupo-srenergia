@@ -37,7 +37,7 @@ export default function ContatoPage() {
         />
         <div className="container-page relative pb-16 pt-36 lg:pb-20 lg:pt-44">
           <Reveal>
-            <Eyebrow className="text-brand-400">Contato</Eyebrow>
+            <Eyebrow className="text-solar">Contato</Eyebrow>
             <h1 className="mt-6 max-w-[18ch] font-display text-h1 text-white text-balance">
               Conte o seu caso. Direcionamos para a frente certa.
             </h1>
@@ -51,12 +51,12 @@ export default function ContatoPage() {
       </section>
 
       {/* ================= FORMULÁRIO + CANAIS ================= */}
-      <section className="section bg-paper-50">
+      <section className="section bg-cream-50">
         <div className="container-page">
           <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
             <Reveal>
-              <h2 className="font-display text-h2 text-paper-900">Envie uma mensagem</h2>
-              <p className="measure mt-4 text-paper-600">
+              <h2 className="font-display text-h2 text-ink-950">Envie uma mensagem</h2>
+              <p className="measure mt-4 text-ink-600">
                 Quanto mais contexto você der sobre o consumo e a operação, mais
                 direto será o retorno.
               </p>
@@ -66,21 +66,21 @@ export default function ContatoPage() {
             </Reveal>
 
             <Reveal index={1}>
-              <div className="rounded-lg border border-paper-200 bg-paper-0 p-7">
-                <h2 className="font-display text-h3 text-paper-900">Canais diretos</h2>
+              <div className="rounded-lg border border-cream-300 bg-cream-50 p-7">
+                <h2 className="font-display text-h3 text-ink-950">Canais diretos</h2>
 
                 {channels.length > 0 ? (
                   <dl className="mt-6 space-y-5">
                     {channels.map((channel) => (
                       <div key={channel.label}>
-                        <dt className="text-eyebrow uppercase text-paper-600">
+                        <dt className="text-eyebrow uppercase text-ink-600">
                           {channel.label}
                         </dt>
-                        <dd className="mt-1.5 text-paper-900">
+                        <dd className="mt-1.5 text-ink-950">
                           {channel.href ? (
                             <a
                               href={channel.href}
-                              className="link-underline font-medium text-brand-600"
+                              className="link-underline font-medium text-solar-ink"
                               {...(channel.href.startsWith("http")
                                 ? { target: "_blank", rel: "noopener noreferrer" }
                                 : {})}
@@ -95,10 +95,10 @@ export default function ContatoPage() {
                     ))}
                   </dl>
                 ) : (
-                  <p className="mt-5 text-sm leading-relaxed text-paper-600">
+                  <p className="mt-5 text-sm leading-relaxed text-ink-600">
                     Telefone, e-mail, WhatsApp e endereço ainda não foram cadastrados.
                     Assim que forem preenchidos em{" "}
-                    <code className="rounded-sm bg-paper-100 px-1 py-0.5 text-[0.8125rem]">
+                    <code className="rounded-sm bg-cream-100 px-1 py-0.5 text-[0.8125rem]">
                       src/lib/contact.ts
                     </code>
                     , aparecem aqui automaticamente.
@@ -116,7 +116,7 @@ export default function ContatoPage() {
                   </a>
                 )}
 
-                <p className="mt-7 border-t border-paper-200 pt-6 text-sm leading-relaxed text-paper-600">
+                <p className="mt-7 border-t border-cream-300 pt-6 text-sm leading-relaxed text-ink-600">
                   {hasEmail
                     ? "Respondemos em horário comercial."
                     : "Prefere falar com uma empresa específica do grupo? Escolha ao lado no campo de assunto."}
@@ -131,7 +131,7 @@ export default function ContatoPage() {
       <section className="on-dark section">
         <div className="container-page">
           <Reveal>
-            <Eyebrow className="text-brand-400">Ou vá direto ao ponto</Eyebrow>
+            <Eyebrow className="text-solar">Ou vá direto ao ponto</Eyebrow>
             <h2 className="mt-6 max-w-[24ch] font-display text-h2 text-white text-balance">
               Já sabe do que precisa?
             </h2>

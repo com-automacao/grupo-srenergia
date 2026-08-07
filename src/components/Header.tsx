@@ -70,24 +70,26 @@ export function Header() {
   const solid = scrolled || mobileOpen;
   // brand-500 sobre branco da 3.4:1 e reprova em AA justamente no hover, que e
   // quando o link esta sendo usado. No claro o hover escurece; no escuro clareia.
-  const navHover = solid ? "hover:text-brand-700" : "hover:text-brand-400";
+  const navHover = solid ? "hover:text-solar-ink" : "hover:text-solar";
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-240 ease-out ${
-        solid
-          ? "border-b border-paper-200 bg-paper-0/90 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
+    <header className="fixed inset-x-0 top-0 z-50">
       <a
         href="#conteudo"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-solar focus:px-4 focus:py-2 focus:text-sm focus:text-white"
       >
         Pular para o conteúdo
       </a>
 
-      <div className="container-page flex h-20 items-center justify-between gap-6">
+      {/* A cápsula paira: encolhe e ganha superfície ao rolar, em vez de virar
+          uma barra colada no topo. */}
+      <div
+        className={`container-page mt-3 flex items-center justify-between gap-6 rounded-full px-4 transition-[background-color,box-shadow,border-color,height] duration-240 ease-out lg:px-5 ${
+          solid
+            ? "h-16 border border-cream-300 bg-cream-50/85 shadow-2 backdrop-blur-xl"
+            : "h-20 border border-transparent"
+        }`}
+      >
         <Link
           href="/"
           aria-label="Grupo SR Energia — página inicial"
@@ -99,7 +101,7 @@ export function Header() {
         {/* ---- Navegação desktop -------------------------------------- */}
         <nav
           aria-label="Principal"
-          className={`hidden items-center gap-1 lg:flex ${solid ? "text-paper-900" : "text-white"}`}
+          className={`hidden items-center gap-1 lg:flex ${solid ? "text-ink-950" : "text-white"}`}
         >
           <div ref={menuRef} className="relative">
             <button
@@ -127,14 +129,14 @@ export function Header() {
             </button>
 
             {menuOpen && (
-              <div className="absolute left-0 top-full mt-2 w-[22rem] rounded-lg border border-paper-200 bg-paper-0 p-2 text-paper-900 shadow-3">
+              <div className="absolute left-0 top-full mt-2 w-[22rem] rounded-lg border border-cream-300 bg-cream-50 p-2 text-ink-950 shadow-3">
                 {companies.map((brand) => {
                   const accent = accentClasses[brand.accent];
                   return (
                     <Link
                       key={brand.slug}
                       href={`/${brand.slug}`}
-                      className="group flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
+                      className="group flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-cream-100"
                     >
                       <BrandGlyph
                         brand={brand}
@@ -145,7 +147,7 @@ export function Header() {
                         <span className="block font-display text-sm font-bold">
                           {brand.name}
                         </span>
-                        <span className="block text-[0.8125rem] leading-snug text-paper-600">
+                        <span className="block text-[0.8125rem] leading-snug text-ink-600">
                           {brand.kicker}
                         </span>
                       </span>
@@ -185,7 +187,7 @@ export function Header() {
           aria-expanded={mobileOpen}
           aria-controls="menu-mobile"
           className={`-mr-2 flex h-11 w-11 items-center justify-center rounded-md lg:hidden ${
-            solid ? "text-paper-900" : "text-white"
+            solid ? "text-ink-950" : "text-white"
           }`}
         >
           <span className="sr-only">{mobileOpen ? "Fechar menu" : "Abrir menu"}</span>
@@ -213,10 +215,10 @@ export function Header() {
       {mobileOpen && (
         <div
           id="menu-mobile"
-          className="h-[calc(100dvh-5rem)] overflow-y-auto border-t border-paper-200 bg-paper-0 lg:hidden"
+          className="container-page mt-2 max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-3xl border border-cream-300 bg-cream-50 shadow-3 lg:hidden"
         >
-          <nav aria-label="Principal (mobile)" className="container-page py-6">
-            <p className="text-eyebrow uppercase text-paper-600">Empresas</p>
+          <nav aria-label="Principal (mobile)" className="p-5">
+            <p className="text-eyebrow uppercase text-ink-600">Empresas</p>
             <ul className="mt-3 space-y-1">
               {companies.map((brand) => {
                 const accent = accentClasses[brand.accent];
@@ -224,7 +226,7 @@ export function Header() {
                   <li key={brand.slug}>
                     <Link
                       href={`/${brand.slug}`}
-                      className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
+                      className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-cream-100"
                     >
                       <BrandGlyph
                         brand={brand}
@@ -233,7 +235,7 @@ export function Header() {
                       />
                       <span>
                         <span className="block font-display font-bold">{brand.name}</span>
-                        <span className="block text-sm leading-snug text-paper-600">
+                        <span className="block text-sm leading-snug text-ink-600">
                           {brand.kicker}
                         </span>
                       </span>
@@ -243,24 +245,24 @@ export function Header() {
               })}
             </ul>
 
-            <p className="mt-8 text-eyebrow uppercase text-paper-600">Também no grupo</p>
+            <p className="mt-8 text-eyebrow uppercase text-ink-600">Também no grupo</p>
             <ul className="mt-3 space-y-1">
               <li>
                 <Link
                   href={`/${mobility.slug}`}
-                  className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
+                  className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-cream-100"
                 >
                   <BrandGlyph brand={mobility} sizes="24px" className="mt-0.5 h-6 w-6 text-mobi-ink" />
                   <span>
                     <span className="block font-display font-bold">{mobility.name}</span>
-                    <span className="block text-sm leading-snug text-paper-600">
+                    <span className="block text-sm leading-snug text-ink-600">
                       {mobility.kicker}
                     </span>
                   </span>
                 </Link>
               </li>
               <li>
-                <Link href="/#obras" className="block rounded-md p-3 font-medium hover:bg-paper-100">
+                <Link href="/#obras" className="block rounded-md p-3 font-medium hover:bg-cream-100">
                   Obras entregues
                 </Link>
               </li>

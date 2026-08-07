@@ -99,19 +99,19 @@ export default async function BrandPage({ params }: Params) {
       </section>
 
       {/* ================= ATUAÇÃO ================= */}
-      <section id="atuacao" className="section scroll-mt-24 bg-paper-50">
+      <section id="atuacao" className="section scroll-mt-24 bg-cream-50">
         <div className="container-page">
           <Reveal>
             <Eyebrow className={accent.textInk}>
               {asLayers ? "As camadas do sistema" : "Nossa atuação"}
             </Eyebrow>
-            <h2 className="mt-6 max-w-[24ch] font-display text-h2 text-paper-900 text-balance">
+            <h2 className="mt-6 max-w-[24ch] font-display text-h2 text-ink-950 text-balance">
               {asLayers
                 ? "Seis fontes. Uma decisão automática a cada instante."
                 : `O que a ${brand.name} entrega.`}
             </h2>
             {asLayers && (
-              <p className="measure mt-6 text-lead text-paper-600">
+              <p className="measure mt-6 text-lead text-ink-600">
                 As camadas são acionadas em ordem de prioridade — da mais barata e
                 limpa à contingência final. A comutação é automática e não é
                 percebida pela operação.
@@ -120,10 +120,10 @@ export default async function BrandPage({ params }: Params) {
           </Reveal>
 
           {asLayers ? (
-            <ol className="mt-14 space-y-px overflow-hidden rounded-lg border border-paper-200 bg-paper-200">
+            <ol className="mt-14 space-y-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300">
               {brand.services.map((service, i) => (
                 <Reveal key={service.title} index={i} as="li">
-                  <div className="flex flex-col gap-4 bg-paper-0 p-7 sm:flex-row sm:gap-8">
+                  <div className="flex flex-col gap-4 bg-cream-50 p-7 sm:flex-row sm:gap-8">
                     <span
                       className={`font-display text-h3 tabular-nums ${accent.textInk}`}
                       aria-hidden="true"
@@ -131,27 +131,27 @@ export default async function BrandPage({ params }: Params) {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <div className="sm:pt-0.5">
-                      <h3 className="font-display text-h3 text-paper-900">{service.title}</h3>
-                      <p className="measure mt-2.5 text-paper-600">{service.description}</p>
+                      <h3 className="font-display text-h3 text-ink-950">{service.title}</h3>
+                      <p className="measure mt-2.5 text-ink-600">{service.description}</p>
                     </div>
                   </div>
                 </Reveal>
               ))}
             </ol>
           ) : (
-            <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-paper-200 bg-paper-200 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-14 grid gap-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300 md:grid-cols-2 lg:grid-cols-3">
               {brand.services.map((service, i) => (
                 <Reveal key={service.title} index={i % 3} as="div" className="h-full">
-                  <div className="group h-full bg-paper-0 p-7">
+                  <div className="group h-full bg-cream-50 p-7">
                     {/* transform em vez de width — ver BrandCard.tsx */}
                     <span
                       aria-hidden="true"
                       className={`block h-[3px] w-8 origin-left transition-transform duration-320 ease-out group-hover:scale-x-[1.75] ${accent.bg}`}
                     />
-                    <h3 className="mt-5 font-display text-h3 text-paper-900">
+                    <h3 className="mt-5 font-display text-h3 text-ink-950">
                       {service.title}
                     </h3>
-                    <p className="mt-3 leading-relaxed text-paper-600">
+                    <p className="mt-3 leading-relaxed text-ink-600">
                       {service.description}
                     </p>
                   </div>
@@ -209,13 +209,13 @@ export default async function BrandPage({ params }: Params) {
       </section>
 
       {/* ================= CTA ================= */}
-      <section className="section bg-paper-100">
+      <section className="section bg-cream-100">
         <div className="container-page">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <h2 className="font-display text-h2 text-paper-900 text-balance">
+            <h2 className="font-display text-h2 text-ink-950 text-balance">
               Vamos falar sobre o seu projeto?
             </h2>
-            <p className="mx-auto mt-5 max-w-[52ch] text-paper-600">
+            <p className="mx-auto mt-5 max-w-[52ch] text-ink-600">
               Descreva a sua necessidade e direcionamos para a frente certa do grupo.
             </p>
             <ButtonLink href="/contato" variant="accent" className={`mt-8 ${accent.btn}`}>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
-import { EnergyBus } from "@/components/EnergyBus";
+import { SolarHero } from "@/components/hero/SolarHero";
 import { EnergyLines } from "@/components/EnergyLines";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
@@ -30,73 +30,13 @@ const PROFILES = [
 export default function Home() {
   return (
     <>
-      {/* ================= HERO ================= */}
-      <section className="on-dark relative overflow-hidden">
-        {/* Malha de infraestrutura: grid hairline + brilho do azul de marca */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.16]"
-          style={{
-            backgroundImage:
-              "linear-gradient(var(--color-ink-700) 1px, transparent 1px), linear-gradient(90deg, var(--color-ink-700) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-            maskImage:
-              "radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 78%)",
-          }}
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 50% at 18% 8%, color-mix(in srgb, var(--color-brand-600) 26%, transparent), transparent 62%), radial-gradient(ellipse 45% 45% at 88% 30%, color-mix(in srgb, var(--color-sr) 14%, transparent), transparent 60%)",
-          }}
-        />
-
-        {/* Barramento: cinco fontes convergindo em uma saída só. Ocupa a metade
-            direita no desktop; no mobile some para não competir com o título. */}
-        <EnergyBus className="pointer-events-none absolute -right-16 top-0 hidden h-full w-[46%] lg:block" />
-
-        <div className="container-page relative flex min-h-[86svh] flex-col justify-center pb-24 pt-36 lg:min-h-[92svh] lg:pb-32">
-          <Reveal>
-            <Eyebrow className="text-brand-400">Ecossistema de energia</Eyebrow>
-          </Reveal>
-
-          <Reveal index={1}>
-            <h1 className="mt-8 max-w-[11ch] font-display text-display text-white text-balance">
-              Toda a energia.{" "}
-              <span className="text-brand-400">Um só grupo.</span>
-            </h1>
-          </Reveal>
-
-          <Reveal index={2}>
-            <p className="mt-8 max-w-[46ch] text-lead text-ink-300">
-              Geração, engenharia, tecnologia própria e mobilidade elétrica em um
-              único ecossistema.
-            </p>
-          </Reveal>
-
-          <Reveal index={3}>
-            <div className="mt-11 flex flex-wrap gap-3">
-              <ButtonLink href="#ecossistema" variant="on-dark">
-                Conheça nossas empresas
-              </ButtonLink>
-              <ButtonLink href="/contato" variant="ghost" className="text-white">
-                Falar com um especialista
-              </ButtonLink>
-            </div>
-          </Reveal>
-
-          {/* No mobile o barramento entra no fluxo, abaixo dos botões. */}
-          <EnergyBus className="mt-14 h-56 w-full lg:hidden" />
-        </div>
-      </section>
+      <SolarHero />
 
       {/* ================= MANIFESTO + ECOSSISTEMA ================= */}
       <section id="ecossistema" className="on-dark section scroll-mt-24">
         <div className="container-page">
           <Reveal className="text-center">
-            <Eyebrow className="justify-center text-brand-400">
+            <Eyebrow className="justify-center text-solar">
               Conheça nossas empresas
             </Eyebrow>
             <h2 className="mx-auto mt-6 max-w-[22ch] font-display text-h1 text-white text-balance">
@@ -127,16 +67,16 @@ export default function Home() {
       {/* ================= MOBILIDADE ELÉTRICA (claro) ================= */}
       <section
         id="mobilidade"
-        className="section scroll-mt-24 bg-paper-50 [--accent:var(--color-mobi)]"
+        className="section scroll-mt-24 bg-cream-50 [--accent:var(--color-mobi)]"
       >
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20">
             <Reveal>
               <Eyebrow className="text-mobi-ink">Nova área de atuação</Eyebrow>
-              <h2 className="mt-6 max-w-[16ch] font-display text-h1 text-paper-900 text-balance">
+              <h2 className="mt-6 max-w-[16ch] font-display text-h1 text-ink-950 text-balance">
                 A energia que move os veículos elétricos.
               </h2>
-              <p className="measure mt-6 text-lead text-paper-600">
+              <p className="measure mt-6 text-lead text-ink-600">
                 {mobility.intro}
               </p>
               <ButtonLink
@@ -149,13 +89,13 @@ export default function Home() {
             </Reveal>
 
             <Reveal index={1}>
-              <ul className="grid gap-px overflow-hidden rounded-lg border border-paper-200 bg-paper-200 sm:grid-cols-2">
+              <ul className="grid gap-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300 sm:grid-cols-2">
                 {mobility.services.slice(0, 6).map((service) => (
-                  <li key={service.title} className="bg-paper-0 p-6">
-                    <h3 className="font-display text-[0.9375rem] font-bold text-paper-900">
+                  <li key={service.title} className="bg-cream-50 p-6">
+                    <h3 className="font-display text-[0.9375rem] font-bold text-ink-950">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-paper-600">
+                    <p className="mt-2 text-sm leading-relaxed text-ink-600">
                       {service.description}
                     </p>
                   </li>
@@ -170,7 +110,7 @@ export default function Home() {
       <section id="obras" className="on-dark section scroll-mt-24">
         <div className="container-page">
           <Reveal>
-            <Eyebrow className="text-brand-400">Obras entregues</Eyebrow>
+            <Eyebrow className="text-solar">Obras entregues</Eyebrow>
             <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-white text-balance">
               Projeto no papel é fácil. Usina gerando é outra coisa.
             </h2>
@@ -234,21 +174,21 @@ export default function Home() {
       </section>
 
       {/* ================= PERFIS ATENDIDOS (claro) ================= */}
-      <section className="section bg-paper-100">
+      <section className="section bg-cream-100">
         <div className="container-page">
           <Reveal>
             <Eyebrow>Para quem atendemos</Eyebrow>
-            <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-paper-900 text-balance">
+            <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-ink-950 text-balance">
               A mesma engenharia, em quatro escalas diferentes.
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-paper-200 bg-paper-200 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
             {PROFILES.map((profile, i) => (
               <Reveal key={profile.title} index={i} as="div" className="h-full">
-                <div className="h-full bg-paper-0 p-7">
-                  <h3 className="font-display text-h3 text-paper-900">{profile.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-paper-600">
+                <div className="h-full bg-cream-50 p-7">
+                  <h3 className="font-display text-h3 text-ink-950">{profile.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-600">
                     {profile.description}
                   </p>
                 </div>
@@ -257,12 +197,12 @@ export default function Home() {
           </div>
 
           <Reveal index={2}>
-            <p className="mt-10 text-sm text-paper-600">
+            <p className="mt-10 text-sm text-ink-600">
               Não sabe por onde começar?{" "}
               {/* brand-700 e não brand-600: sobre paper-100 o 600 cai para 4:1. */}
               <Link
                 href="/contato"
-                className="link-underline font-semibold text-brand-700"
+                className="link-underline font-semibold text-solar-ink"
               >
                 Fale com a SR Energia
               </Link>{" "}

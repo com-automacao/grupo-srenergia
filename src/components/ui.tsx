@@ -28,20 +28,21 @@ export function Eyebrow({
 type ButtonVariant = "primary" | "accent" | "on-dark" | "ghost";
 
 const buttonBase =
-  "inline-flex h-12 items-center justify-center gap-2 rounded-md px-6 text-sm font-semibold " +
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium " +
   "transition-[background-color,border-color,color,box-shadow,transform] duration-240 " +
   "ease-out active:translate-y-0 disabled:pointer-events-none disabled:opacity-45";
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  // O hover escurece (brand-700), não clareia: com brand-500 o texto branco
-  // caía para 3.4:1 justamente no estado em que o botão está sendo usado.
+  // Texto ESCURO sobre o laranja (5.87:1). Branco daria 3.35 e reprovaria — o
+  // laranja e claro demais. O hover so eleva, sem mexer na cor: mudar o matiz
+  // reabriria o problema de contraste no exato momento de uso.
   primary:
-    "bg-brand-600 text-white hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-2",
+    "bg-solar text-ink-950 hover:-translate-y-0.5 hover:shadow-2",
   // Sem fundo nem cor de texto próprios: quem chama passa
   // `accentClasses[...].btn`, que já traz o par fundo/texto aprovado em AA.
   accent: "hover:-translate-y-0.5 hover:shadow-3",
   "on-dark":
-    "bg-white text-ink-950 hover:-translate-y-0.5 hover:bg-paper-100 hover:shadow-2",
+    "bg-cream-50 text-ink-950 hover:-translate-y-0.5 hover:bg-cream-100 hover:shadow-2",
   // Herda a cor do contexto (claro ou escuro) e só empresta 25% dela à borda.
   ghost:
     "border border-[color-mix(in_srgb,currentColor_25%,transparent)] hover:-translate-y-0.5 hover:border-[color:var(--accent)] hover:text-[color:var(--accent)]",

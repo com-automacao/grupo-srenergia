@@ -1,123 +1,132 @@
 @import "tailwindcss";
 
+/* Breakpoints (ipad:, desktop-sm:, ultrawide:) e tokens de fonte exigidos pelo
+   hero do Originkit. Importados ANTES dos nossos tokens: em @theme a última
+   definição vence, então o bloco abaixo tem a palavra final. */
+@import "./originkit-section-themes.css";
+@import "./originkit-section-theme.css";
+
 /* ============================================================================
    Grupo SR Energia — tokens do design system
    Fonte de verdade: MASTER.md. Nenhum valor aqui é arbitrário.
    ========================================================================== */
 
 @theme {
-  /* --- Azul-noite: espinha institucional ---------------------------------- */
-  --color-ink-950: #050b18;
-  --color-ink-900: #0a1224;
-  --color-ink-800: #111c33;
-  --color-ink-700: #1b2a47;
-  --color-ink-500: #617aa5;
-  --color-ink-300: #93a4c0;
+  /* --- Creme: a superfície onde o site vive -------------------------------- */
+  --color-cream-50: #fff7e9;
+  --color-cream-100: #f7eedc;
+  --color-cream-200: #efe3cc;
+  --color-cream-300: #e3d4b8;
 
-  /* --- Claro: onde o conteúdo respira ------------------------------------- */
-  --color-paper-0: #ffffff;
-  --color-paper-50: #f6f8fb;
-  --color-paper-100: #edf1f7;
-  --color-paper-200: #dde4ee;
-  --color-paper-600: #5a6880;
-  --color-paper-900: #0b1220;
+  /* --- Tinta quente: texto e superfícies escuras --------------------------- */
+  --color-ink-950: #0d0b08;
+  --color-ink-900: #171310;
+  --color-ink-800: #241d17;
+  --color-ink-600: #574e43;
+  --color-ink-500: #6b6153;
+  /* Texto de apoio SOBRE o escuro (8.4:1 no ink-950). */
+  --color-ink-300: #b5a897;
 
-  /* --- Azul de marca do Grupo --------------------------------------------- */
-  --color-brand-700: #0a46b4;
-  --color-brand-600: #1f76d2;
-  --color-brand-500: #2b8fe8;
-  --color-brand-400: #5aaef5;
+  /* --- Solar: o acento do Grupo, herdado da SR Energia ---------------------
+     --color-solar       decorativo e fundo de botão (nunca texto sobre creme)
+     --color-solar-ink   texto sobre creme (5.05:1 no creme-50, 4.66 no 100)
+     --color-solar-lit   texto sobre o escuro (5.87:1 no ink-950)
+     Botão solar leva texto ink-950, a 5.87:1 — a mesma inversão que o sistema
+     anterior usava, pelo mesmo motivo: laranja é claro demais para branco. */
+  --color-solar: #ff4b12;
+  --color-solar-ink: #c93000;
+  --color-solar-lit: #ff4b12;
+  --color-amber: #ffa033;
 
-  /* --- Acentos de sub-marca (herdados dos logos) --------------------------
-     Cada acento tem tres papeis, e cada um passa em AA no seu contexto:
-       --color-X       decorativo e fundo de botao (nunca texto sobre claro)
-       --color-X-ink   texto sobre superficie clara  (>= 4.5 em paper-50/100)
-       --color-X-lit   texto sobre superficie escura (>= 4.5 em ink-900/950)
-     Ver MASTER.md 2.4/2.6 para a tabela de razoes medidas. */
+  /* --- Acentos de sub-marca (só nas páginas de marca) ---------------------- */
   --color-sr: #ff4b12;
-  --color-sr-ink: #cc3100;
+  --color-sr-ink: #c93000;
   --color-sr-lit: #ff4b12;
 
   --color-jireh: #21c2f5;
-  --color-jireh-ink: #077497;
+  --color-jireh-ink: #06687f;
   --color-jireh-lit: #21c2f5;
 
   --color-jirehmac: #86ce2e;
-  --color-jirehmac-ink: #4e771b;
+  --color-jirehmac-ink: #466b18;
   --color-jirehmac-lit: #86ce2e;
 
-  /* Vermelho e violeta sao escuros demais para receber texto escuro, entao o
-     tom puro foi ajustado em ~1% para que o texto BRANCO passe no botao. */
   --color-abest: #e8151c;
-  --color-abest-ink: #d7141a;
+  --color-abest-ink: #c11217;
   --color-abest-lit: #f2565b;
 
   --color-mobi: #7257ff;
-  --color-mobi-ink: #6749ff;
+  --color-mobi-ink: #5a3ceb;
   --color-mobi-lit: #9c87ff;
 
   /* --- Semânticos ---------------------------------------------------------- */
   --color-success: #12863d;
-  --color-warning: #d97706;
-  --color-danger: #dc2626;
+  --color-warning: #b45309;
+  --color-danger: #c1121f;
 
-  /* --- Tipografia ---------------------------------------------------------- */
-  --font-display: var(--font-sora), system-ui, sans-serif;
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* --- Tipografia ----------------------------------------------------------
+     Serifada editorial no display, grotesca no texto, mono nos rótulos e
+     leituras de dados — a voz de instrumentação da referência. */
+  --font-display: var(--font-instrument), Georgia, serif;
+  --font-sans: var(--font-tight-next), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+  /* O hero do Originkit referencia estes dois nomes. */
+  --font-instrument-serif: var(--font-instrument), Georgia, serif;
+  --font-tight: var(--font-tight-next), ui-sans-serif, system-ui, sans-serif;
 
-  --text-display: clamp(2.75rem, 6.5vw, 5.5rem);
-  --text-display--line-height: 0.98;
-  --text-display--letter-spacing: -0.04em;
-  --text-display--font-weight: 800;
+  /* A serifada é de peso único (400) e ganha presença por tamanho e tracking
+     negativo, não por peso. */
+  --text-display: clamp(3rem, 7vw, 5.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 400;
 
-  --text-h1: clamp(2.25rem, 4.5vw, 3.75rem);
-  --text-h1--line-height: 1.04;
-  --text-h1--letter-spacing: -0.03em;
-  --text-h1--font-weight: 800;
+  --text-h1: clamp(2.5rem, 5vw, 4rem);
+  --text-h1--line-height: 1.06;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 400;
 
-  --text-h2: clamp(1.75rem, 3vw, 2.75rem);
+  --text-h2: clamp(2rem, 3.4vw, 3rem);
   --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.02em;
-  --text-h2--font-weight: 700;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h2--font-weight: 400;
 
-  --text-h3: clamp(1.25rem, 1.8vw, 1.625rem);
-  --text-h3--line-height: 1.2;
+  --text-h3: clamp(1.25rem, 1.7vw, 1.5rem);
+  --text-h3--line-height: 1.25;
   --text-h3--letter-spacing: -0.01em;
-  --text-h3--font-weight: 700;
+  --text-h3--font-weight: 500;
 
-  --text-lead: clamp(1.125rem, 1.6vw, 1.375rem);
-  --text-lead--line-height: 1.55;
+  --text-lead: clamp(1.0625rem, 1.4vw, 1.25rem);
+  --text-lead--line-height: 1.5;
+  --text-lead--letter-spacing: -0.01em;
 
-  --text-body: 1.0625rem;
-  --text-body--line-height: 1.65;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
 
-  --text-sm: 0.9375rem;
-  --text-sm--line-height: 1.6;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.55;
 
-  --text-eyebrow: 0.75rem;
-  --text-eyebrow--line-height: 1;
-  --text-eyebrow--letter-spacing: 0.16em;
-  --text-eyebrow--font-weight: 600;
+  /* Rótulo em mono: a voz dos dados. */
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1;
+  --text-label--letter-spacing: 0.12em;
+  --text-label--font-weight: 400;
 
-  /* --- Raio ---------------------------------------------------------------- */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* --- Raio -----------------------------------------------------------------
+     Quase reto: a malha é ortogonal e cantos arredondados brigam com ela. A
+     pílula (full) fica reservada a nav e botões. */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 
-  /* --- Elevação (hairline-first) ------------------------------------------ */
-  --shadow-1: 0 1px 2px rgb(11 18 32 / 0.04);
-  --shadow-2: 0 4px 16px -4px rgb(11 18 32 / 0.08);
-  --shadow-3: 0 12px 32px -8px rgb(11 18 32 / 0.12);
+  /* --- Elevação ------------------------------------------------------------ */
+  --shadow-1: 0 1px 2px rgb(13 11 8 / 0.05);
+  --shadow-2: 0 6px 20px -6px rgb(13 11 8 / 0.12);
+  --shadow-3: 0 18px 44px -12px rgb(13 11 8 / 0.2);
 
   /* --- Motion -------------------------------------------------------------- */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-@theme inline {
-  /* Layout — não são cores, ficam fora do namespace de cor */
-  --container-narrow: 760px;
 }
 
 :root {
@@ -125,78 +134,68 @@
   --dur-base: 240ms;
   --dur-slow: 320ms;
   --dur-draw: 1100ms;
-  --stagger: 60ms;
 
-  --space-section: clamp(5rem, 10vw, 10rem);
-  --space-block: clamp(2.5rem, 5vw, 4rem);
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --space-section: clamp(5rem, 9vw, 9rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
 
-  /* Acento da seção corrente. Cada página/seção redefine. */
-  --accent: var(--color-brand-600);
-  --accent-ink: var(--color-brand-700);
+  /* Acento da página corrente. As páginas de marca redefinem. */
+  --accent: var(--color-solar);
+  --accent-ink: var(--color-solar-ink);
+  --accent-lit: var(--color-solar-lit);
+
+  /* Passo da malha estrutural. */
+  --grid-step: 25%;
 }
 
 /* ============================================================================
-   Base
-   ---------------------------------------------------------------------------
-   Tudo aqui vive em @layer base. Sem a layer, estas regras ficariam FORA das
-   cascade layers do Tailwind e venceriam todas as utilities — o seletor `*`
-   abaixo, por exemplo, sobrescreveria qualquer `border-*` aplicado nas
-   classes. Dentro da layer, a utility sempre ganha.
+   Base — em @layer base para que as utilities do Tailwind sempre vençam.
    ========================================================================== */
 
 @layer base {
   * {
-    border-color: var(--color-paper-200);
+    border-color: var(--color-cream-200);
   }
 
   html {
     scroll-behavior: smooth;
-    /* Compensa o header fixo ao pular para âncoras */
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 7rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--color-paper-50);
-    color: var(--color-paper-900);
+    background: var(--color-cream-50);
+    color: var(--color-ink-950);
     font-family: var(--font-sans);
     font-size: var(--text-body);
-    line-height: 1.65;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background: var(--accent);
-    color: #fff;
+    background: var(--color-solar);
+    color: var(--color-ink-950);
   }
 
-  /* Foco: nunca removido, sempre no acento da seção. */
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-ink);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  /* Em superfície escura o acento pode não ter contraste suficiente com o preto:
-     o anel usa branco por baixo para garantir visibilidade em qualquer acento. */
   .on-dark :focus-visible {
-    outline-color: #fff;
+    outline-color: var(--color-cream-50);
   }
 }
 
 /* ============================================================================
-   Utilitários do sistema
-   ---------------------------------------------------------------------------
-   Em @layer components para que qualquer utility do Tailwind aplicada no mesmo
-   elemento tenha a palavra final (ex.: `bg-paper-50` sobre `.on-dark`).
+   Utilitários do sistema — em @layer components, abaixo das utilities.
    ========================================================================== */
 
 @layer components {
   .container-page {
     width: 100%;
-    max-width: 1240px;
+    max-width: 1360px;
     margin-inline: auto;
     padding-inline: var(--gutter);
   }
@@ -206,22 +205,34 @@
   }
 
   .measure {
-    max-width: 68ch;
+    max-width: 62ch;
   }
 
-  /* Superfície escura: inverte a semântica de texto dos filhos. */
+  /* Superfície escura: o creme vira a cor do texto. */
   .on-dark {
     background: var(--color-ink-950);
-    color: #fff;
+    color: var(--color-cream-50);
   }
 
-  /* ----- Reveal no scroll ---------------------------------------------------- */
-  /* O estado escondido depende da classe .js, aplicada no <html> por um script
-     inline antes da primeira pintura. Sem JS o conteúdo nasce visível — nada de
-     página em branco se o script falhar. */
+  /* ----- Malha estrutural --------------------------------------------------
+     Linhas verticais que atravessam a página inteira, como na referência.
+     Puro background: nenhum elemento no DOM, nenhum custo de layout. */
+  .grid-rules {
+    background-image: linear-gradient(
+      90deg,
+      var(--rule-color, var(--color-cream-200)) 1px,
+      transparent 1px
+    );
+    background-size: var(--grid-step) 100%;
+    background-position: calc(var(--grid-step) * -1) 0;
+  }
+
+  /* ----- Reveal no scroll ---------------------------------------------------
+     O estado escondido depende de .js no <html>, aplicada antes da primeira
+     pintura. Sem JS o conteúdo nasce visível. */
   .js [data-reveal="armed"] {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
 
   [data-reveal="in"] {
@@ -232,9 +243,9 @@
       transform var(--dur-slow) var(--ease-out) var(--reveal-delay, 0ms);
   }
 
-  /* ----- Linhas de energia --------------------------------------------------- */
-  /* Os paths declaram pathLength="1", então o comprimento é normalizado e não
-     precisamos medir nada em JS. */
+  /* ----- Linhas de energia (seção do ecossistema) --------------------------
+     Os paths declaram pathLength="1": o comprimento é normalizado pelo próprio
+     SVG e nada precisa ser medido em JavaScript. */
   .js .energy-path {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
@@ -245,39 +256,7 @@
     transition: stroke-dashoffset var(--dur-draw) var(--ease-in-out) var(--draw-delay, 0ms);
   }
 
-  /* ----- Pulso de energia (hero) --------------------------------------------
-     Um traço curto correndo dentro de um dash gigante: o classico "cometa".
-     Anima so stroke-dashoffset, sem layout e sem JavaScript. */
-  .energy-pulse {
-    stroke-dasharray: 0.13 0.87;
-    stroke-dashoffset: 1;
-    animation: energy-pulse var(--pulse-dur, 7s) linear infinite var(--pulse-delay, 0s);
-  }
-
-  @keyframes energy-pulse {
-    from {
-      stroke-dashoffset: 1;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  .bus-node {
-    animation: bus-node-breathe 4s var(--ease-in-out) infinite;
-  }
-
-  @keyframes bus-node-breathe {
-    0%,
-    100% {
-      opacity: 0.75;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-
-  /* ----- Link com sublinhado que cresce da esquerda -------------------------- */
+  /* ----- Link com sublinhado que cresce da esquerda ------------------------- */
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-repeat: no-repeat;
@@ -294,6 +273,7 @@
 
 /* ============================================================================
    Reduced motion — nenhum conteúdo depende de animação para ser lido.
+   Fora de layer, de propósito: precisa vencer tudo acima.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -317,16 +297,5 @@
 
   .js .energy-path {
     stroke-dashoffset: 0;
-  }
-
-  /* O pulso é puramente ambiental: sem movimento ele não tem função, então sai
-     de cena em vez de congelar em uma posição arbitrária do trajeto. */
-  .energy-pulse {
-    display: none;
-  }
-
-  .bus-node {
-    animation: none;
-    opacity: 1;
   }
 }

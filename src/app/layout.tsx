@@ -1,20 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Instrument_Serif, Inter_Tight, DM_Mono } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
-const sora = Sora({
+/* Serifada editorial no display: peso único, presença vinda do tamanho e do
+   tracking negativo. Grotesca no texto. Mono nos rótulos e leituras de dados —
+   a voz de instrumentação do sistema. */
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-sora",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
-const inter = Inter({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
+  variable: "--font-tight-next",
+  display: "swap",
+});
+
+const dmMono = DM_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-dm-mono",
   display: "swap",
 });
 
@@ -46,14 +57,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050b18",
+  themeColor: "#0d0b08",
 };
 
 /**
  * Marca o documento como "JS ativo" antes da primeira pintura. Os estados
- * iniciais das animações (reveal, desenho das linhas) dependem desta classe —
- * sem ela o conteúdo nasce visível, o que é o comportamento correto para quem
- * navega sem JavaScript.
+ * iniciais das animações dependem desta classe — sem ela o conteúdo nasce
+ * visível, que é o comportamento correto para quem navega sem JavaScript.
  */
 const JS_FLAG = `document.documentElement.classList.add('js')`;
 
@@ -61,11 +71,15 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${sora.variable} ${inter.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${instrument.variable} ${interTight.variable} ${dmMono.variable}`}
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: JS_FLAG }} />
       </head>
       <body>
+        <SmoothScroll />
         <Header />
         <main id="conteudo">{children}</main>
         <Footer />
