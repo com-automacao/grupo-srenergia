@@ -47,6 +47,7 @@ export function SlideGlowButton({
       } ${className ?? ""}`}
     >
       <span className="relative z-10">{children}</span>
+      <span aria-hidden="true" className="slide-glow__spark" />
       <span aria-hidden="true" className="slide-glow__glow">
         {children}
       </span>

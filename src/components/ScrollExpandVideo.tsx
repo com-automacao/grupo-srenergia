@@ -31,8 +31,17 @@ type ScrollExpandVideoProps = {
   children?: ReactNode;
 };
 
-const CLOSED = "inset(14% 18% round 20px)";
+const CLOSED = "inset(16% 32% round 24px)";
 const OPEN = "inset(0% 0% round 0px)";
+
+/**
+ * A cor entra junto com a janela. Fechado, o quadro está quase dessaturado e um
+ * passo mais escuro; aberto, chega às cores plenas do sobrevoo. Como está no
+ * mesmo `scrub` da abertura, rolar de volta reverte sozinho — não há estado a
+ * guardar.
+ */
+const DRAINED = "saturate(0.18) contrast(1.08) brightness(0.72)";
+const VIVID = "saturate(1) contrast(1) brightness(1)";
 
 export function ScrollExpandVideo({
   src1080,
@@ -67,27 +76,32 @@ export function ScrollExpandVideo({
       observer.observe(root);
     }
 
-    if (reduced) return () => observer?.disconnect();
+    // Sem movimento: a seção nasce aberta e em cores plenas.
+    if (reduced) {
+      const media = root.querySelector<HTMLElement>(".sev-media");
+      const vid = root.querySelector<HTMLElement>(".sev-video");
+      if (media) media.style.clipPath = OPEN;
+      if (vid) vid.style.filter = VIVID;
+      return () => observer?.disconnect();
+    }
 
     gsap.registerPlugin(ScrollTrigger);
 
     const context = gsap.context(() => {
-      gsap.fromTo(
-        ".sev-media",
-        { clipPath: CLOSED },
-        {
-          clipPath: OPEN,
-          ease: "none",
-          scrollTrigger: {
-            trigger: root,
-            start: "top top",
-            end: "+=80%",
-            scrub: 0.4,
-            pin: true,
-            anticipatePin: 1,
-          },
+      const open = gsap.timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: "top top",
+          end: "+=90%",
+          scrub: 0.4,
+          pin: true,
+          anticipatePin: 1,
         },
-      );
+      });
+
+      open
+        .fromTo(".sev-media", { clipPath: CLOSED }, { clipPath: OPEN, ease: "none" }, 0)
+        .fromTo(".sev-video", { filter: DRAINED }, { filter: VIVID, ease: "none" }, 0);
 
       // O título recua enquanto o vídeo toma a tela.
       gsap.to(".sev-copy", {
@@ -111,7 +125,7 @@ export function ScrollExpandVideo({
 
   return (
     <div ref={rootRef} className="relative h-dvh min-h-[640px] w-full overflow-hidden">
-      <div className="sev-media absolute inset-0 [clip-path:inset(14%_18%_round_20px)]">
+      <div className="sev-media absolute inset-0 [clip-path:inset(16%_32%_round_24px)]">
         <video
           ref={videoRef}
           poster={poster}
@@ -120,7 +134,7 @@ export function ScrollExpandVideo({
           playsInline
           preload="metadata"
           aria-label={label}
-          className="h-full w-full object-cover"
+          className="sev-video h-full w-full object-cover [filter:saturate(0.18)_contrast(1.08)_brightness(0.72)]"
         >
           <source src={src720} type="video/mp4" media="(max-width: 767px)" />
           <source src={src1080} type="video/mp4" />

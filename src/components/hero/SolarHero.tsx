@@ -107,7 +107,7 @@ export function SolarHero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[38%] bg-linear-to-b from-transparent via-ink-950/30 to-ink-950"
       />
 
-      <div className="relative h-[874px] overflow-hidden ipad:h-[1133px] desktop-sm:h-dvh desktop-sm:min-h-[860px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
+      <div className="relative h-[874px] overflow-hidden ipad:h-[1133px] desktop-sm:h-[calc(100dvh-4.5rem)] desktop-sm:min-h-[820px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
         {/* Camada 2 — o sol */}
         {/* z-[12]: acima da mao (z-10) e abaixo do texto (z-20). Em z-10 o dedo
             indicador passava por cima do sol, invertendo a leitura. */}
@@ -118,7 +118,7 @@ export function SolarHero() {
         {/* Camada 3 — o texto */}
         <div
           data-parallax-layer="3"
-          className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-32 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
+          className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-24 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
         >
           <div className="flex flex-col items-center gap-5 desktop-sm:items-start">
             <p className={`font-mono text-label uppercase ${TINT.accent}`}>
@@ -184,8 +184,10 @@ export function SolarHero() {
         />
       </div>
 
-      {/* Régua das marcas, ancorada na base do hero */}
-      <div className="absolute inset-x-0 bottom-0 z-40 border-t border-cream-50/10">
+      {/* Régua das marcas — em fluxo, abaixo do palco. Enquanto ela era
+          absoluta sobre o palco, a camada 3 do parallax descia os botões por
+          cima dela. */}
+      <div className="relative z-40 border-t border-cream-50/10">
         <ul className="container-page flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-5 desktop-sm:justify-between">
           {companies.map((brand) => (
             <li key={brand.slug}>

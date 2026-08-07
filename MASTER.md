@@ -189,6 +189,10 @@ cairia sobre a própria cor e sumiria.
 A seção de obras da home abre um sobrevoo de drone que cresce de uma janela
 recortada até sangrar de borda a borda, com a seção presa (`pin`) enquanto isso.
 
+A cor entra junto com a janela: fechado o quadro está quase dessaturado e um
+passo mais escuro, aberto chega às cores plenas do sobrevoo. Como está no mesmo
+`scrub` da abertura, rolar de volta reverte sozinho — não há estado a guardar.
+
 A expansão anima **`clip-path`**, não largura nem altura. Largura e altura são
 propriedades de layout: animá-las forçaria reflow a cada quadro, com a página
 inteira reposicionada 60 vezes por segundo. O `clip-path` é composto na GPU e o
@@ -222,14 +226,31 @@ a régua do acento se estende de 0 a 100% via `transform` — nunca via `width`,
 que é propriedade de layout.
 
 **CTA de marca** (`SlideGlowButton`) — o botão principal das páginas de
-empresa. Em repouso é um pill de rótulo sólido; no hover uma cópia acesa no
-acento da marca desliza da esquerda via `clip-path`, e a borda acende junto.
+empresa. Em repouso é um pill de rótulo sólido. No hover, três coisas acontecem
+juntas em 420ms: o rótulo aceso é revelado da esquerda por `clip-path`, uma
+**faísca** de 2px percorre o botão de ponta a ponta como corrente num fio, e a
+borda acende com um brilho quente acumulando pela esquerda.
+
+A faísca vive num elemento de largura total e translada 100% da própria
+largura: parte da borda esquerda e para exatamente na direita, em qualquer
+tamanho de botão, sem medir nada.
 
 A referência deixava o rótulo em repouso **vazado** (`-webkit-text-stroke`),
 preenchendo só no hover. Aqui não: contorno fino sobre fundo escuro reprova em
 contraste com folga, e um CTA precisa ser legível antes de alguém apontar o
 mouse. O brilho é o que o hover acrescenta — a leitura nunca depende dele. E é
 um `<a>`, não um `<button>`: ele navega.
+
+**Fio de energia** (`EnergyWire`) — barramento acima da grade de perfis. A
+corrente avança da esquerda para a direita presa ao scroll e, ao chegar em cada
+derivação, o ramo desce e o nó daquele setor acende.
+
+Feito em HTML e `transform`, não em SVG. A primeira versão usava
+`stroke-dashoffset` com `pathLength="1"`, mas o SVG precisava de
+`preserveAspectRatio="none"` para acompanhar a largura da grade, e sob escala
+não uniforme o `vectorEffect="non-scaling-stroke"` faz o navegador calcular o
+tracejado em espaço de tela: a normalização se perde e o fio sai picotado. Com
+`scaleX`/`scaleY` não há o que normalizar.
 
 **Header** — cápsula flutuante que encolhe de 80 para 64px e ganha superfície ao
 rolar, em vez de virar uma barra colada no topo.

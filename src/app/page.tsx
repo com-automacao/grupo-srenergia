@@ -4,6 +4,7 @@ import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
 import { SolarHero } from "@/components/hero/SolarHero";
 import { ScrollExpandVideo } from "@/components/ScrollExpandVideo";
+import { EnergyWire } from "@/components/EnergyWire";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -169,7 +170,12 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid gap-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
+          {/* O fio corre acima da grade e alimenta um setor por vez. Só em lg,
+              onde a grade tem de fato quatro colunas — abaixo disso as
+              derivações não teriam onde aterrissar. */}
+          <EnergyWire className="mt-14 hidden h-10 w-full lg:block" />
+
+          <div className="mt-0 grid gap-px bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
             {PROFILES.map((profile, i) => (
               <Reveal key={profile.title} index={i} as="div" className="h-full">
                 <div className="h-full bg-cream-50 p-7">
