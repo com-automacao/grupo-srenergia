@@ -128,6 +128,27 @@ contraste vem de **peso, escala e tracking**, não de mudança de família.
 
 ---
 
+## 3.1 Mobile
+
+O hero é a peça que mais exige adaptação, porque herdou coordenadas fixas do
+componente de origem:
+
+- A **mão** é ancorada na base e dimensionada em `vw`, não em pixels. Com
+  largura fixa ela ficava com zoom de 1,5× no celular e só o centro da palma
+  aparecia.
+- O **núcleo escuro do orbe** é um disco de ~240px que apaga o que estiver
+  atrás. No desktop a mão é larga e os dedos passam por fora dele; no celular a
+  mão precisou ser alargada para `165vw` pelo mesmo motivo.
+- A **lavagem escura da base** tem altura relativa à seção. Em 38% ela engolia a
+  mão inteira no celular, onde a mão é proporcionalmente muito menor — cai para
+  16% abaixo de `desktop-sm`.
+
+Nas seções de conteúdo, o celular esconde o que não rende em tela estreita: as
+três fotos de obra saem (o vídeo já conta a história) e as descrições dos cards
+viram acordeão.
+
+---
+
 ## 4. Espaçamento, raio e elevação
 
 Base **8px**. `--space-section: clamp(5rem, 9vw, 9rem)`,
@@ -256,6 +277,23 @@ Feito em HTML e `transform`, não em SVG. A primeira versão usava
 não uniforme o `vectorEffect="non-scaling-stroke"` faz o navegador calcular o
 tracejado em espaço de tela: a normalização se perde e o fio sai picotado. Com
 `scaleX`/`scaleY` não há o que normalizar.
+
+**Planta da cidade** (`CityGrid`) — fundo em traço da seção de perfis, com as
+luzes acendendo da esquerda para a direita conforme a seção sobe: a energia
+entrando pela rede e se espalhando pelo bairro.
+
+O traçado vem de um PRNG **semeado**. Sem semente, `Math.random` daria um mapa
+no servidor e outro na hidratação, e o React acusaria divergência de marcação.
+
+**Card que abre** (`DisclosureCard`) — no celular o texto fica atrás de um
+toque; a partir de `lg` nasce aberto.
+
+A visibilidade é decidida **no CSS**, não em JavaScript: o corpo vive numa grade
+que vai de `0fr` a `1fr` e o breakpoint `lg` força `1fr` independentemente do
+estado. Isso evita o problema clássico do acordeão responsivo — renderizar
+aberto no servidor e fechar na hidratação, que produz um salto visível. Animar
+`grid-template-rows` em vez de `height` também dispensa medir o conteúdo. O
+texto está sempre no DOM, aberto ou fechado.
 
 **Header** — cápsula flutuante que encolhe de 80 para 64px e ganha superfície ao
 rolar, em vez de virar uma barra colada no topo.

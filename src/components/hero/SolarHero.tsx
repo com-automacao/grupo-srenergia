@@ -101,13 +101,17 @@ export function SolarHero() {
       {/* Lavagem escura na base, para o hero morrer no escuro antes da seção
           seguinte. Fica em z-[15]: acima do fundo e da mão (z-10), abaixo do
           texto (z-20). Em z-30 ela cobria os botões — o CTA creme aparecia
-          cinza-escuro e a linha de apoio perdia contraste. */}
+          cinza-escuro e a linha de apoio perdia contraste.
+
+          A altura é relativa à seção, então no mobile 38% engolia a mão
+          inteira: ali ela é proporcionalmente muito menor que no desktop, onde
+          a lavagem cobre só o punho. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[38%] bg-linear-to-b from-transparent via-ink-950/30 to-ink-950"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[16%] bg-linear-to-b from-transparent via-ink-950/25 to-ink-950 desktop-sm:h-[38%] desktop-sm:via-ink-950/30"
       />
 
-      <div className="relative h-[874px] overflow-hidden ipad:h-[1133px] desktop-sm:h-[calc(100dvh-4.5rem)] desktop-sm:min-h-[820px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
+      <div className="relative h-[790px] overflow-hidden ipad:h-[1000px] desktop-sm:h-[calc(100dvh-4.5rem)] desktop-sm:min-h-[820px] ultrawide:mx-auto ultrawide:h-[1080px] ultrawide:max-w-[1920px]">
         {/* Camada 2 — o sol */}
         {/* z-[12]: acima da mao (z-10) e abaixo do texto (z-20). Em z-10 o dedo
             indicador passava por cima do sol, invertendo a leitura. */}
@@ -118,9 +122,9 @@ export function SolarHero() {
         {/* Camada 3 — o texto */}
         <div
           data-parallax-layer="3"
-          className="absolute top-[150px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-9 text-center ipad:top-[230px] desktop-sm:top-auto desktop-sm:bottom-24 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
+          className="absolute top-[108px] left-1/2 z-20 flex w-[min(100%-2.5rem,34rem)] -translate-x-1/2 flex-col items-center gap-7 text-center ipad:top-[180px] ipad:gap-9 desktop-sm:top-auto desktop-sm:bottom-24 desktop-sm:left-[max(3rem,calc(50%-40rem))] desktop-sm:w-[36rem] desktop-sm:translate-x-0 desktop-sm:items-start desktop-sm:text-left"
         >
-          <div className="flex flex-col items-center gap-5 desktop-sm:items-start">
+          <div className="flex flex-col items-center gap-4 desktop-sm:items-start desktop-sm:gap-5">
             <p className={`font-mono text-label uppercase ${TINT.accent}`}>
               Ecossistema de energia
             </p>
@@ -160,7 +164,7 @@ export function SolarHero() {
           aria-hidden
           src={asset("hand.png")}
           alt=""
-          className="pointer-events-none absolute top-[calc(50%+255px)] left-[calc(50%-4px)] z-10 h-[410px] w-[738px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover ipad:top-[894px] ipad:left-1/2 ipad:h-[502px] ipad:w-[902px] desktop-sm:top-auto desktop-sm:bottom-0 desktop-sm:h-auto desktop-sm:w-[86vw] desktop-sm:min-w-[1239px] desktop-sm:origin-bottom desktop-sm:translate-y-0 desktop-sm:scale-115 ultrawide:top-[384px] ultrawide:bottom-auto ultrawide:w-[1180px] ultrawide:min-w-0 ultrawide:scale-100"
+          className="pointer-events-none absolute bottom-0 left-1/2 z-10 h-auto w-[165vw] max-w-none -translate-x-1/2 object-contain ipad:bottom-0 ipad:left-1/2 ipad:h-auto ipad:w-[125vw] desktop-sm:top-auto desktop-sm:bottom-0 desktop-sm:h-auto desktop-sm:w-[86vw] desktop-sm:min-w-[1239px] desktop-sm:origin-bottom desktop-sm:translate-y-0 desktop-sm:scale-115 ultrawide:top-[384px] ultrawide:bottom-auto ultrawide:w-[1180px] ultrawide:min-w-0 ultrawide:scale-100"
           style={{ maskImage: HAND_MASK, WebkitMaskImage: HAND_MASK, filter: TINT.filter }}
         />
 

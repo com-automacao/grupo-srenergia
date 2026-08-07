@@ -68,6 +68,9 @@ src/
 │  ├─ originkit/            Hero-19 do Originkit: backdrop, orbe, mão
 │  ├─ SmoothScroll.tsx      Lenis + sincronia com o ScrollTrigger
 │  ├─ ScrollExpandVideo.tsx Vídeo que expande no scroll (seção de obras)
+│  ├─ EnergyWire.tsx       Fio de energia que preenche no scroll
+│  ├─ CityGrid.tsx         Planta aérea com luzes acendendo no scroll
+│  ├─ DisclosureCard.tsx   Card que abre ao toque no celular
 │  ├─ reactbits/           LightPillar — hero das páginas de marca
 │  ├─ SoftAurora.tsx       Aurora em shader (alternativa, fora de uso)
 │  ├─ aurora-shader.ts     GLSL do SoftAurora (react-bits)

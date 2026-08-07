@@ -5,6 +5,8 @@ import { BrandCard } from "@/components/BrandCard";
 import { SolarHero } from "@/components/hero/SolarHero";
 import { ScrollExpandVideo } from "@/components/ScrollExpandVideo";
 import { EnergyWire } from "@/components/EnergyWire";
+import { CityGrid } from "@/components/CityGrid";
+import { DisclosureCard } from "@/components/DisclosureCard";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -87,15 +89,12 @@ export default function Home() {
             </Reveal>
 
             <Reveal index={1}>
-              <ul className="grid gap-px overflow-hidden rounded-lg border border-cream-300 bg-cream-300 sm:grid-cols-2">
+              <ul className="grid gap-px bg-cream-300 sm:grid-cols-2">
                 {mobility.services.slice(0, 6).map((service) => (
-                  <li key={service.title} className="bg-cream-50 p-6">
-                    <h3 className="font-display text-[0.9375rem] font-bold text-ink-950">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                  <li key={service.title}>
+                    <DisclosureCard title={service.title} className="h-full">
                       {service.description}
-                    </p>
+                    </DisclosureCard>
                   </li>
                 ))}
               </ul>
@@ -120,7 +119,9 @@ export default function Home() {
           </p>
         </ScrollExpandVideo>
 
-        <div className="container-page pb-24 pt-20">
+        {/* No celular o vídeo já conta a história e as fotos virariam três
+            blocos de rolagem sem ganho — ficam a partir de sm. */}
+        <div className="container-page hidden pb-24 pt-20 sm:block">
           <div className="grid gap-px bg-ink-800 sm:grid-cols-3">
             {[
               {
@@ -161,8 +162,11 @@ export default function Home() {
       </section>
 
       {/* ================= PERFIS ATENDIDOS (claro) ================= */}
-      <section className="section bg-cream-100">
-        <div className="container-page">
+      <section className="relative overflow-hidden section bg-cream-100">
+        {/* Planta aérea em traço: as luzes acendem conforme a seção sobe. */}
+        <CityGrid className="pointer-events-none absolute inset-0 h-full w-full" />
+
+        <div className="container-page relative">
           <Reveal>
             <Eyebrow>Para quem atendemos</Eyebrow>
             <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-ink-950 text-balance">
@@ -175,15 +179,12 @@ export default function Home() {
               derivações não teriam onde aterrissar. */}
           <EnergyWire className="mt-14 hidden h-10 w-full lg:block" />
 
-          <div className="mt-0 grid gap-px bg-cream-300 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-px bg-cream-300 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4">
             {PROFILES.map((profile, i) => (
               <Reveal key={profile.title} index={i} as="div" className="h-full">
-                <div className="h-full bg-cream-50 p-7">
-                  <h3 className="font-display text-h3 text-ink-950">{profile.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-600">
-                    {profile.description}
-                  </p>
-                </div>
+                <DisclosureCard title={profile.title} className="h-full">
+                  {profile.description}
+                </DisclosureCard>
               </Reveal>
             ))}
           </div>
