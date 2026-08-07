@@ -48,7 +48,7 @@ const READOUT = ["Geração", "Armazenamento", "Automação"];
  * mão entra no mesmo giro, senão a pele continuaria iluminada de laranja por um
  * sol azul.
  */
-const HERO_TINT: "solar" | "azul" = "azul";
+const HERO_TINT: "solar" | "azul" = "solar";
 
 const TINT = {
   solar: { filter: undefined, orb: "#FF4B12", accent: "text-solar" },

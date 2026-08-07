@@ -17,9 +17,17 @@ function asset(file: string) {
  *
  * Export is frame-clipped: 804x920 @2x = 402x460 CSS, anchored to the frame origin.
  */
-/** Fades the lamp export out before its bottom edge. */
+/**
+ * Desvanece a lampada nas duas pontas.
+ *
+ * O topo e novidade: as 40 primeiras linhas do PNG (de 1016) nao sao pretas —
+ * carregam luz ambiente de brilho ~28. Com `mix-blend-screen` isso clareia o
+ * fundo, e depois que a imagem desceu para baixo do header a borda superior
+ * virou uma faixa horizontal visivel atravessando a tela inteira. O fade vai de
+ * 0 a 4%, que termina logo antes da barra de neon (y=44, ou 4.33%).
+ */
 const LAMP_MASK =
-  "linear-gradient(to bottom, #000 0%, #000 55%, rgba(0,0,0,0.6) 78%, transparent 100%)";
+  "linear-gradient(to bottom, transparent 0%, #000 4%, #000 55%, rgba(0,0,0,0.6) 78%, transparent 100%)";
 
 export const Backdrop = ({ filter }: { filter?: string }) => (
   <div style={{ filter }} className="absolute inset-0">

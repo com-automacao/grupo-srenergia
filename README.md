@@ -146,12 +146,12 @@ Sequestrar a rolagem de quem pediu menos movimento é o oposto do que a
 preferência existe para garantir. Sem JavaScript, todo o conteúdo nasce
 visível.
 
-> 🔬 **Teste de tom em andamento.** O hero da home está em **azul**, não no
-> laranja da marca. A chave é `HERO_TINT` no topo de
-> [`SolarHero.tsx`](src/components/hero/SolarHero.tsx) — trocar `"azul"` por
-> `"solar"` devolve o laranja. Como o fundo são PNGs achatados em laranja, o
-> azul vem de um `hue-rotate(192deg)` aplicado ao fundo, ao halo do orbe e à
-> mão; a esfera de partículas recebe a cor direto.
+> 🔬 **Chave de tom do hero.** `HERO_TINT`, no topo de
+> [`SolarHero.tsx`](src/components/hero/SolarHero.tsx), alterna entre `"solar"`
+> (laranja da marca — o valor atual) e `"azul"` (o azul do logotipo). Como o
+> fundo são PNGs achatados em laranja, o azul vem de um `hue-rotate(192deg)`
+> aplicado ao fundo, ao halo do orbe e à mão; a esfera de partículas recebe a
+> cor direto. Ficou no código como alternativa testada, não como pendência.
 
 > ⚠️ **Cascade layers.** As regras base ficam em `@layer base` e os utilitários
 > do projeto em `@layer components`. CSS fora de layer vence *todas* as
