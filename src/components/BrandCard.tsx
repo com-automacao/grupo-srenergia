@@ -16,10 +16,11 @@ export function BrandCard({ brand }: { brand: Brand }) {
       href={`/${brand.slug}`}
       className={`group relative flex h-full flex-col overflow-hidden rounded-lg border border-ink-800 bg-ink-900 p-7 transition-[border-color,transform,box-shadow] duration-240 ease-out hover:-translate-y-0.5 ${accent.borderHover} ${accent.ring}`}
     >
-      {/* Régua de acento no topo */}
+      {/* Régua de acento no topo. Anima `transform`, não `width`: largura é
+          propriedade de layout e forçaria reflow a cada frame. */}
       <span
         aria-hidden="true"
-        className={`absolute inset-x-0 top-0 h-[3px] w-0 transition-[width] duration-320 ease-out group-hover:w-full ${accent.bg}`}
+        className={`absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 transition-transform duration-320 ease-out group-hover:scale-x-100 ${accent.bg}`}
       />
 
       <BrandMark mark={brand.mark} className={`h-11 w-11 ${accent.text}`} />

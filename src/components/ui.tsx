@@ -33,11 +33,13 @@ const buttonBase =
   "ease-out active:translate-y-0 disabled:pointer-events-none disabled:opacity-45";
 
 const buttonVariants: Record<ButtonVariant, string> = {
+  // O hover escurece (brand-700), não clareia: com brand-500 o texto branco
+  // caía para 3.4:1 justamente no estado em que o botão está sendo usado.
   primary:
-    "bg-brand-600 text-white hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-2",
-  // Sem fundo próprio: quem chama passa `accentClasses[...].btn`, evitando que
-  // duas classes de background disputem precedência na folha de estilo.
-  accent: "text-white hover:-translate-y-0.5 hover:shadow-2",
+    "bg-brand-600 text-white hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-2",
+  // Sem fundo nem cor de texto próprios: quem chama passa
+  // `accentClasses[...].btn`, que já traz o par fundo/texto aprovado em AA.
+  accent: "hover:-translate-y-0.5 hover:shadow-3",
   "on-dark":
     "bg-white text-ink-950 hover:-translate-y-0.5 hover:bg-paper-100 hover:shadow-2",
   // Herda a cor do contexto (claro ou escuro) e só empresta 25% dela à borda.

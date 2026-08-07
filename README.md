@@ -106,16 +106,28 @@ existe, ele é adicionado ao `MASTER.md` primeiro.
 Um **azul-noite institucional** (`#050B18`) serve de espinha para todo o grupo,
 e cada marca carrega um acento herdado do seu próprio logo:
 
-| Marca | Acento |
-|---|---|
-| SR Energia | laranja `#FF4B12` |
-| Jireh Energia | ciano `#21C2F5` |
-| JirehMac | verde-limão `#86CE2E` |
-| ABEST | vermelho `#EA1B22` |
-| Mobilidade Elétrica | violeta `#7B61FF` |
+| Marca | puro | `-ink` (texto no claro) | `-lit` (texto no escuro) |
+|---|---|---|---|
+| SR Energia | `#FF4B12` | `#CC3100` | `#FF4B12` |
+| Jireh Energia | `#21C2F5` | `#077497` | `#21C2F5` |
+| JirehMac | `#86CE2E` | `#4E771B` | `#86CE2E` |
+| ABEST | `#E8151C` | `#D7141A` | `#F2565B` |
+| Mobilidade Elétrica | `#7257FF` | `#6749FF` | `#9C87FF` |
+
+Cada acento tem três papéis porque uma cor só não passa em contraste nos dois
+regimes de luz. O tom puro é **decorativo e fundo de botão** — nunca texto sobre
+fundo claro. Em botão, laranja, ciano e verde-limão recebem **texto escuro**
+(5,9 a 10,2:1); vermelho e violeta recebem branco. Inverter o texto preserva a
+cor da marca em vez de escurecê-la até virar lama.
 
 O regime de luz alterna por seção: escuro nas âncoras (hero, ecossistema,
 obras, rodapé), claro onde o conteúdo respira.
+
+Todo par texto/fundo do site foi **medido**, não estimado — a tabela de razões
+está em [`MASTER.md`](MASTER.md) §2.6, junto com as armadilhas já encontradas
+(ex.: `brand-600` reprova sobre `paper-100`; o hover do botão primário escurece
+em vez de clarear, senão o texto branco cairia para 3,4:1 no exato momento de
+uso).
 
 ### Motion
 

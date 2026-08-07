@@ -281,7 +281,9 @@ export function getBrand(slug: string): Brand | undefined {
 export const accentClasses: Record<
   Brand["accent"],
   {
+    /** Texto do acento sobre superficie ESCURA (token -lit). */
     text: string;
+    /** Texto do acento sobre superficie CLARA (token -ink). */
     textInk: string;
     bg: string;
     bgSoft: string;
@@ -289,12 +291,17 @@ export const accentClasses: Record<
     borderHover: string;
     ring: string;
     stroke: string;
-    /** Botao solido no acento da marca (usar com <ButtonLink variant="accent">). */
+    /**
+     * Botao solido no acento. O texto e escuro nos acentos claros (laranja,
+     * ciano, verde-limao) e branco nos escuros (vermelho, violeta) — inverter
+     * o texto preserva a cor da marca em vez de escurece-la ate passar em AA.
+     * O hover nao muda a cor: so eleva, como manda a tese de interacao.
+     */
     btn: string;
   }
 > = {
   sr: {
-    text: "text-sr",
+    text: "text-sr-lit",
     textInk: "text-sr-ink",
     bg: "bg-sr",
     bgSoft: "bg-sr/10",
@@ -302,10 +309,10 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-sr",
     ring: "[--accent:var(--color-sr)]",
     stroke: "stroke-sr",
-    btn: "bg-sr hover:bg-sr-ink",
+    btn: "bg-sr text-ink-950",
   },
   jireh: {
-    text: "text-jireh",
+    text: "text-jireh-lit",
     textInk: "text-jireh-ink",
     bg: "bg-jireh",
     bgSoft: "bg-jireh/10",
@@ -313,10 +320,10 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-jireh",
     ring: "[--accent:var(--color-jireh)]",
     stroke: "stroke-jireh",
-    btn: "bg-jireh hover:bg-jireh-ink",
+    btn: "bg-jireh text-ink-950",
   },
   jirehmac: {
-    text: "text-jirehmac",
+    text: "text-jirehmac-lit",
     textInk: "text-jirehmac-ink",
     bg: "bg-jirehmac",
     bgSoft: "bg-jirehmac/10",
@@ -324,10 +331,10 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-jirehmac",
     ring: "[--accent:var(--color-jirehmac)]",
     stroke: "stroke-jirehmac",
-    btn: "bg-jirehmac hover:bg-jirehmac-ink",
+    btn: "bg-jirehmac text-ink-950",
   },
   abest: {
-    text: "text-abest",
+    text: "text-abest-lit",
     textInk: "text-abest-ink",
     bg: "bg-abest",
     bgSoft: "bg-abest/10",
@@ -335,10 +342,10 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-abest",
     ring: "[--accent:var(--color-abest)]",
     stroke: "stroke-abest",
-    btn: "bg-abest hover:bg-abest-ink",
+    btn: "bg-abest text-white",
   },
   mobi: {
-    text: "text-mobi",
+    text: "text-mobi-lit",
     textInk: "text-mobi-ink",
     bg: "bg-mobi",
     bgSoft: "bg-mobi/10",
@@ -346,6 +353,6 @@ export const accentClasses: Record<
     borderHover: "group-hover:border-mobi",
     ring: "[--accent:var(--color-mobi)]",
     stroke: "stroke-mobi",
-    btn: "bg-mobi hover:bg-mobi-ink",
+    btn: "bg-mobi text-white",
   },
 };

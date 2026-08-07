@@ -68,6 +68,9 @@ export function Header() {
   }, [mobileOpen]);
 
   const solid = scrolled || mobileOpen;
+  // brand-500 sobre branco da 3.4:1 e reprova em AA justamente no hover, que e
+  // quando o link esta sendo usado. No claro o hover escurece; no escuro clareia.
+  const navHover = solid ? "hover:text-brand-700" : "hover:text-brand-400";
 
   return (
     <header
@@ -104,7 +107,7 @@ export function Header() {
               aria-expanded={menuOpen}
               aria-haspopup="true"
               onClick={() => setMenuOpen((v) => !v)}
-              className="flex items-center gap-1.5 rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 hover:text-brand-500"
+              className={`flex items-center gap-1.5 rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 ${navHover}`}
             >
               Empresas
               <svg
@@ -135,7 +138,7 @@ export function Header() {
                     >
                       <BrandMark
                         mark={brand.mark}
-                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.text}`}
+                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.textInk}`}
                       />
                       <span className="min-w-0">
                         <span className="block font-display text-sm font-bold">
@@ -154,13 +157,13 @@ export function Header() {
 
           <Link
             href={`/${mobility.slug}`}
-            className="rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 hover:text-brand-500"
+            className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 ${navHover}`}
           >
             Mobilidade Elétrica
           </Link>
           <Link
             href="/#obras"
-            className="rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 hover:text-brand-500"
+            className={`rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-160 ${navHover}`}
           >
             Obras
           </Link>
@@ -224,7 +227,7 @@ export function Header() {
                     >
                       <BrandMark
                         mark={brand.mark}
-                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.text}`}
+                        className={`mt-0.5 h-6 w-6 shrink-0 ${accent.textInk}`}
                       />
                       <span>
                         <span className="block font-display font-bold">{brand.name}</span>
@@ -245,7 +248,7 @@ export function Header() {
                   href={`/${mobility.slug}`}
                   className="flex items-start gap-3 rounded-md p-3 transition-colors duration-160 hover:bg-paper-100"
                 >
-                  <BrandMark mark={mobility.mark} className="mt-0.5 h-6 w-6 shrink-0 text-mobi" />
+                  <BrandMark mark={mobility.mark} className="mt-0.5 h-6 w-6 shrink-0 text-mobi-ink" />
                   <span>
                     <span className="block font-display font-bold">{mobility.name}</span>
                     <span className="block text-sm leading-snug text-paper-600">

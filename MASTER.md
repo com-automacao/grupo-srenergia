@@ -74,24 +74,35 @@ Extraído do ícone da SR Energia e da esfera Jireh.
 Cada empresa do ecossistema tem um acento herdado do próprio logo. É o mecanismo que
 permite ao visitante distinguir as marcas sem ler o nome.
 
-| Marca | Token | Hex | Origem |
-|---|---|---|---|
-| SR Energia | `--accent-sr` | `#FF4B12` | laranja do ícone e do logotipo |
-| Jireh Energia | `--accent-jireh` | `#21C2F5` | ciano do gradiente da esfera |
-| JirehMac | `--accent-jirehmac` | `#86CE2E` | verde-limão do raio |
-| ABEST | `--accent-abest` | `#EA1B22` | vermelho do símbolo |
-| Mobilidade Elétrica | `--accent-mobi` | `#7B61FF` | **novo** — única faixa livre do círculo cromático |
+Cada acento tem **três papéis**, porque uma única cor não passa em contraste nos dois
+regimes de luz. O tom puro nunca carrega texto sobre fundo claro.
 
-Cada acento tem uma variante `-soft` (10% alpha) para fundos e `-ink` (versão escurecida)
-para texto sobre fundo claro, onde o acento puro reprovaria em contraste.
+| Papel | Token | Uso |
+|---|---|---|
+| puro | `--color-X` | réguas, pontos, bordas, ícones e **fundo de botão** |
+| escuro | `--color-X-ink` | texto sobre `paper-*` |
+| claro | `--color-X-lit` | texto sobre `ink-*` |
 
-| Token soft (fundo) | Token ink (texto no claro) |
-|---|---|
-| `--accent-sr-soft` `#FF4B121A` | `--accent-sr-ink` `#C42F00` |
-| `--accent-jireh-soft` `#21C2F51A` | `--accent-jireh-ink` `#0B7FA8` |
-| `--accent-jirehmac-soft` `#86CE2E1A` | `--accent-jirehmac-ink` `#4A7A0E` |
-| `--accent-abest-soft` `#EA1B221A` | `--accent-abest-ink` `#C2141A` |
-| `--accent-mobi-soft` `#7B61FF1A` | `--accent-mobi-ink` `#5333E8` |
+| Marca | puro | `-ink` | `-lit` | Origem |
+|---|---|---|---|---|
+| SR Energia | `#FF4B12` | `#CC3100` | `#FF4B12` | laranja do ícone e do logotipo |
+| Jireh Energia | `#21C2F5` | `#077497` | `#21C2F5` | ciano do gradiente da esfera |
+| JirehMac | `#86CE2E` | `#4E771B` | `#86CE2E` | verde-limão do raio |
+| ABEST | `#E8151C` | `#D7141A` | `#F2565B` | vermelho do símbolo |
+| Mobilidade Elétrica | `#7257FF` | `#6749FF` | `#9C87FF` | **novo** — única faixa livre do círculo |
+
+> O vermelho da ABEST e o violeta da Mobilidade foram escurecidos em cerca de 1% em
+> relação ao tom original para que o **texto branco** passe em AA sobre eles. É um
+> desvio imperceptível ao olho e preserva a identidade; a alternativa seria enlamear
+> a cor da marca.
+
+**Texto sobre o acento (botões).** Laranja, ciano e verde-limão são claros demais para
+texto branco — recebem texto `--color-ink-950`, o que dá 5,9 / 9,5 / 10,2 : 1. Vermelho
+e violeta são escuros demais para texto escuro — recebem branco, a 4,6 : 1. Inverter o
+texto preserva a cor da marca; escurecê-la até caber no branco a destruiria.
+
+O hover de botão de acento **não muda a cor** — apenas eleva. Qualquer mudança de
+matiz no hover reabriria o problema de contraste no exato momento de uso.
 
 ### 2.5 Semânticos
 
@@ -104,8 +115,27 @@ para texto sobre fundo claro, onde o acento puro reprovaria em contraste.
 
 ### 2.6 Regra de contraste
 
-Todo texto ≥ **4.5:1**. Texto grande (≥24px/700) ≥ **3:1**.
-Acentos puros (`--accent-*`) **nunca** carregam texto sobre fundo claro — use `-ink`.
+Todo texto ≥ **4.5:1**, medido — não estimado. Razões auditadas:
+
+| Par | Razão |
+|---|---|
+| `ink-300` sobre `ink-950` (corpo no escuro) | 7.79 |
+| `ink-500` sobre `ink-950` (rodapé) | 4.53 |
+| `brand-400` sobre `ink-950` | 8.25 |
+| `paper-600` sobre `paper-50` | 5.30 |
+| `brand-700` sobre `paper-100` | 7.27 |
+| branco sobre `brand-600` (botão) | 4.58 |
+| branco sobre `brand-700` (botão em hover) | 8.94 |
+| `-ink` de cada acento sobre `paper-100` | ≥ 4.62 |
+| `-lit` de cada acento sobre `ink-900` | ≥ 4.52 |
+| texto do botão sobre acento puro | ≥ 4.61 |
+
+**Armadilhas já encontradas neste projeto:**
+
+- `brand-600` reprova sobre `paper-100` (4.04). Em faixa `paper-100`, use `brand-700`.
+- O hover do botão primário **escurece** para `brand-700`. Com `brand-500` o texto
+  branco caía para 3.39 — a falha aconteceria no estado de uso.
+- `ink-500` no valor original (`#4A5E82`) dava 3.01 e foi clareado.
 
 ---
 

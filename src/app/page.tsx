@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { companies, mobility } from "@/lib/brands";
+import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
 import { EnergyLines } from "@/components/EnergyLines";
 import { Reveal } from "@/components/Reveal";
@@ -155,7 +155,7 @@ export default function Home() {
               <ButtonLink
                 href={`/${mobility.slug}`}
                 variant="accent"
-                className="mt-9 bg-mobi hover:bg-mobi-ink"
+                className={`mt-9 ${accentClasses[mobility.accent].btn}`}
               >
                 Ver soluções de recarga
               </ButtonLink>
@@ -272,9 +272,10 @@ export default function Home() {
           <Reveal index={2}>
             <p className="mt-10 text-sm text-paper-600">
               Não sabe por onde começar?{" "}
+              {/* brand-700 e não brand-600: sobre paper-100 o 600 cai para 4:1. */}
               <Link
                 href="/contato"
-                className="link-underline font-semibold text-brand-600"
+                className="link-underline font-semibold text-brand-700"
               >
                 Fale com a SR Energia
               </Link>{" "}

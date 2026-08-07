@@ -142,9 +142,10 @@ export default async function BrandPage({ params }: Params) {
               {brand.services.map((service, i) => (
                 <Reveal key={service.title} index={i % 3} as="div" className="h-full">
                   <div className="group h-full bg-paper-0 p-7">
+                    {/* transform em vez de width — ver BrandCard.tsx */}
                     <span
                       aria-hidden="true"
-                      className={`block h-[3px] w-8 transition-[width] duration-320 ease-out group-hover:w-14 ${accent.bg}`}
+                      className={`block h-[3px] w-8 origin-left transition-transform duration-320 ease-out group-hover:scale-x-[1.75] ${accent.bg}`}
                     />
                     <h3 className="mt-5 font-display text-h3 text-paper-900">
                       {service.title}
