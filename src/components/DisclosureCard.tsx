@@ -23,16 +23,27 @@ type DisclosureCardProps = {
   title: string;
   children: ReactNode;
   className?: string;
+  /** Controlado de fora quando o pai precisa reagir à abertura. */
+  open?: boolean;
+  onToggle?: () => void;
 };
 
-export function DisclosureCard({ title, children, className }: DisclosureCardProps) {
-  const [open, setOpen] = useState(false);
+export function DisclosureCard({
+  title,
+  children,
+  className,
+  open: openProp,
+  onToggle,
+}: DisclosureCardProps) {
+  const [selfOpen, setSelfOpen] = useState(false);
+  const controlled = openProp !== undefined;
+  const open = controlled ? openProp : selfOpen;
 
   return (
     <div className={`bg-cream-50 ${className ?? ""}`}>
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => (controlled ? onToggle?.() : setSelfOpen((v) => !v))}
         aria-expanded={open}
         className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left lg:pointer-events-none lg:px-7 lg:pt-7 lg:pb-0"
       >

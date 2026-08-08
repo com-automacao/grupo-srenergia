@@ -71,6 +71,7 @@ src/
 │  ├─ EnergyWire.tsx       Fio de energia que preenche no scroll
 │  ├─ CityGrid.tsx         Planta aérea com luzes acendendo no scroll
 │  ├─ DisclosureCard.tsx   Card que abre ao toque no celular
+│  ├─ ProfileGrid.tsx      Perfis + fio vertical no celular
 │  ├─ reactbits/           LightPillar — hero das páginas de marca
 │  ├─ SoftAurora.tsx       Aurora em shader (alternativa, fora de uso)
 │  ├─ aurora-shader.ts     GLSL do SoftAurora (react-bits)

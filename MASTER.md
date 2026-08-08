@@ -29,7 +29,13 @@ estende, translação de −2px, **sem escala**); reveals no scroll com *stagger
 scroll, onde uma mão sustenta um sol de partículas.
 
 **Proibido:** bounce, elástico, carrossel com autoplay, animação de propriedade
-de layout (`width`/`height`/`top`/`left`).
+de layout (`width`/`height`/`top`/`left`) — a proibição vale para o que é
+contínuo ou preso ao scroll, onde o reflow acontece a cada quadro.
+
+*Exceção documentada:* a largura do card de perfil no celular. É uma transição
+de 320ms numa subárvore de quatro itens, disparada por toque e não pelo scroll;
+encolher por `transform` distorceria o texto, que é o problema que a regra
+existe para evitar.
 
 ---
 
@@ -267,9 +273,18 @@ contraste com folga, e um CTA precisa ser legível antes de alguém apontar o
 mouse. O brilho é o que o hover acrescenta — a leitura nunca depende dele. E é
 um `<a>`, não um `<button>`: ele navega.
 
-**Fio de energia** (`EnergyWire`) — barramento acima da grade de perfis. A
-corrente avança da esquerda para a direita presa ao scroll e, ao chegar em cada
-derivação, o ramo desce e o nó daquele setor acende.
+**Fio de energia** — duas leituras do mesmo fio, decididas por breakpoint:
+
+- **Desktop** (`EnergyWire`) — barramento horizontal acima da grade de quatro
+  colunas, com uma derivação descendo em cada coluna.
+- **Celular** (`ProfileGrid`) — barramento vertical na lateral direita, com um
+  ramo entrando em cada linha. O card fica mais estreito para abrir esse
+  corredor e volta à largura cheia quando é aberto: com o texto à mostra, o
+  espaço é dele.
+
+No celular o ramo e o nó vivem **dentro** de cada linha, alinhados por flexbox.
+Posicioná-los por porcentagem da altura sairia do lugar assim que um card
+abrisse e mudasse a altura da linha.
 
 Feito em HTML e `transform`, não em SVG. A primeira versão usava
 `stroke-dashoffset` com `pathLength="1"`, mas o SVG precisava de

@@ -4,9 +4,9 @@ import { accentClasses, companies, mobility } from "@/lib/brands";
 import { BrandCard } from "@/components/BrandCard";
 import { SolarHero } from "@/components/hero/SolarHero";
 import { ScrollExpandVideo } from "@/components/ScrollExpandVideo";
-import { EnergyWire } from "@/components/EnergyWire";
 import { CityGrid } from "@/components/CityGrid";
 import { DisclosureCard } from "@/components/DisclosureCard";
+import { ProfileGrid } from "@/components/ProfileGrid";
 import { Reveal } from "@/components/Reveal";
 import { Arrow, ButtonLink, Eyebrow } from "@/components/ui";
 
@@ -71,10 +71,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= MOBILIDADE ELÉTRICA (claro) ================= */}
+      {/* ================= MOBILIDADE ELÉTRICA (claro) =================
+          Escondida no celular a pedido do cliente. A frente continua no menu e
+          com página própria — só não abre espaço na home em tela estreita. */}
       <section
         id="mobilidade"
-        className="section scroll-mt-24 bg-cream-50 [--accent:var(--color-mobi)]"
+        className="hidden section scroll-mt-24 bg-cream-50 md:block [--accent:var(--color-mobi)]"
       >
         <div className="container-page">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-20">
@@ -178,20 +180,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          {/* O fio corre acima da grade e alimenta um setor por vez. Só em lg,
-              onde a grade tem de fato quatro colunas — abaixo disso as
-              derivações não teriam onde aterrissar. */}
-          <EnergyWire className="mt-14 hidden h-10 w-full lg:block" />
-
-          <div className="mt-10 grid gap-px bg-cream-300 sm:grid-cols-2 lg:mt-0 lg:grid-cols-4">
-            {PROFILES.map((profile, i) => (
-              <Reveal key={profile.title} index={i} as="div" className="h-full">
-                <DisclosureCard title={profile.title} className="h-full">
-                  {profile.description}
-                </DisclosureCard>
-              </Reveal>
-            ))}
-          </div>
+          <ProfileGrid profiles={PROFILES} />
 
           <Reveal index={2}>
             <p className="mt-10 text-sm text-ink-600">
