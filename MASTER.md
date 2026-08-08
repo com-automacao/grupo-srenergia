@@ -278,12 +278,19 @@ não uniforme o `vectorEffect="non-scaling-stroke"` faz o navegador calcular o
 tracejado em espaço de tela: a normalização se perde e o fio sai picotado. Com
 `scaleX`/`scaleY` não há o que normalizar.
 
-**Planta da cidade** (`CityGrid`) — fundo em traço da seção de perfis, com as
-luzes acendendo da esquerda para a direita conforme a seção sobe: a energia
-entrando pela rede e se espalhando pelo bairro.
+**Planta da cidade** (`CityGrid`) — fundo em traço da seção **do ecossistema**,
+com as luzes acendendo da esquerda para a direita conforme a seção sobe: a
+energia entrando pela rede e se espalhando pelo bairro.
 
 O traçado vem de um PRNG **semeado**. Sem semente, `Math.random` daria um mapa
 no servidor e outro na hidratação, e o React acusaria divergência de marcação.
+
+A moldura é `1200×900`, proporção próxima à da seção. O SVG usa `slice`, então
+uma moldura baixa seria ampliada para cobrir a altura — a `420` o mapa era
+escalado 2,6× e o traçado saía ralo e esticado.
+
+Na seção de perfis fica só o **fio de energia**: as duas coisas juntas
+competiam pela mesma leitura.
 
 **Card que abre** (`DisclosureCard`) — no celular o texto fica atrás de um
 toque; a partir de `lg` nasce aberto.

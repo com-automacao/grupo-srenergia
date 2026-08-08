@@ -36,8 +36,15 @@ export default function Home() {
       <SolarHero />
 
       {/* ================= ECOSSISTEMA ================= */}
-      <section id="ecossistema" className="section scroll-mt-28 bg-cream-100">
-        <div className="container-page">
+      <section
+        id="ecossistema"
+        className="section relative scroll-mt-28 overflow-hidden bg-cream-100"
+      >
+        {/* Planta aérea em traço: as luzes acendem da esquerda para a direita
+            conforme a seção sobe — a energia entrando pela rede. */}
+        <CityGrid className="pointer-events-none absolute inset-0 h-full w-full" />
+
+        <div className="container-page relative">
           <Reveal>
             <p className="font-mono text-label uppercase text-solar-ink">
               Conheça nossas empresas
@@ -162,11 +169,8 @@ export default function Home() {
       </section>
 
       {/* ================= PERFIS ATENDIDOS (claro) ================= */}
-      <section className="relative overflow-hidden section bg-cream-100">
-        {/* Planta aérea em traço: as luzes acendem conforme a seção sobe. */}
-        <CityGrid className="pointer-events-none absolute inset-0 h-full w-full" />
-
-        <div className="container-page relative">
+      <section className="section bg-cream-100">
+        <div className="container-page">
           <Reveal>
             <Eyebrow>Para quem atendemos</Eyebrow>
             <h2 className="mt-6 max-w-[20ch] font-display text-h1 text-ink-950 text-balance">

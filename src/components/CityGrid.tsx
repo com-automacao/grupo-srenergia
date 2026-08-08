@@ -18,7 +18,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  */
 
 const W = 1200;
-const H = 420;
+/**
+ * Proporção próxima à da seção que o recebe. O SVG usa `slice`, então uma
+ * moldura muito baixa seria ampliada para cobrir a altura e o traçado sairia
+ * ralo e esticado — a 420 de altura o mapa era escalado 2,6x.
+ */
+const H = 900;
 
 /** PRNG determinístico — mesma semente, mesmo mapa, servidor e cliente. */
 function mulberry32(seed: number) {
@@ -43,16 +48,16 @@ function buildPlan(): Plan {
 
   // Avenidas horizontais, com leve inclinação — cidade não é papel milimetrado.
   const rows: number[] = [];
-  for (let y = 40; y < H; y += 52 + rand() * 26) {
+  for (let y = 34; y < H; y += 58 + rand() * 34) {
     const drift = (rand() - 0.5) * 18;
     rows.push(y);
     streets.push(`M0 ${y.toFixed(1)} L${W} ${(y + drift).toFixed(1)}`);
   }
 
   // Ruas verticais, interrompidas em alturas diferentes — quarteirões irregulares.
-  for (let x = 30; x < W; x += 54 + rand() * 40) {
-    const from = rand() * 90;
-    const to = H - rand() * 90;
+  for (let x = 26; x < W; x += 48 + rand() * 38) {
+    const from = rand() * 160;
+    const to = H - rand() * 160;
     const drift = (rand() - 0.5) * 14;
     streets.push(
       `M${x.toFixed(1)} ${from.toFixed(1)} L${(x + drift).toFixed(1)} ${to.toFixed(1)}`,
@@ -60,15 +65,16 @@ function buildPlan(): Plan {
 
     // Cruzamentos: candidatos a receber luz.
     for (const y of rows) {
-      if (y > from && y < to && rand() > 0.55) {
+      if (y > from && y < to && rand() > 0.42) {
         nodes.push({ x: x + drift * ((y - from) / (to - from)), y });
       }
     }
   }
 
   // Duas diagonais longas, as vias que cortam a malha.
-  streets.push(`M-40 ${H * 0.82} L${W * 0.62} -30`);
-  streets.push(`M${W * 0.48} ${H + 30} L${W + 40} ${H * 0.12}`);
+  streets.push(`M-40 ${H * 0.78} L${W * 0.68} -30`);
+  streets.push(`M${W * 0.42} ${H + 30} L${W + 40} ${H * 0.16}`);
+  streets.push(`M-40 ${H * 0.24} L${W + 40} ${H * 0.62}`);
 
   // Acende da esquerda para a direita: a energia entra pela rede.
   nodes.sort((a, b) => a.x - b.x);
